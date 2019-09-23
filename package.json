@@ -1,0 +1,28 @@
+{
+  "name": "organise-this",
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": "Jono Clarnette",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrjono1/OrganiseThis.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "eslint",
+    "test": "jest --config jestconfig.json"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^12.6.2",
+    "@types/jest": "^24.0.18",
+    "jest": "^24.9.0",
+    "eslint": "6.1.0",
+    "eslint-config-prettier": "6.3.0",
+    "prettier": "1.18.2",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.4.3",
+    "yarn": "^1.17.3"
+  }
+}

@@ -38,4 +38,10 @@ export class Person {
     const copy = JSON.parse(JSON.stringify(this)) as Person;
     return copy;
   }
+
+  public toString(): string {
+    return `Person Id: ${this._id}
+    Person Evaluated: ${this._fitness ? 'Yes' : 'No'}
+    Person Fitness: ${this._fitness}`;
+  }
 }

@@ -1,7 +1,4 @@
-import { PersonSetting } from '../settings/PersonSetting';
-import { SpanSetting } from '../settings/SpanSetting';
 import { Calendar } from './Calendar';
-import { Day } from './Day';
 import { Settings } from '../settings/Settings';
 
 export default class OrganiseThis {
@@ -9,7 +6,7 @@ export default class OrganiseThis {
   private _settings: Settings;
 
   private _bestCalendar?: Calendar;
-  private _bestCalendarFitness?: number;
+  private _iterations?: number;
 
   constructor(name: string, settings: Settings) {
     this._name = name;
@@ -20,12 +17,21 @@ export default class OrganiseThis {
     return this._name;
   }
 
-  public get bestCalendary(): Calendar | undefined {
+  public get bestCalendar(): Calendar | undefined {
     return this._bestCalendar;
   }
 
-  public get bestCalendaryFitness(): number | undefined {
-    return this._bestCalendarFitness;
+  public get iterations(): number {
+    return this._iterations || 0;
+  }
+
+  public toString(): string {
+    if (!this._bestCalendar) {
+      return 'No Canidate Calenders found';
+    }
+
+    return `OrganiseThis Name:${this._name}
+${this._bestCalendar.toString()}`;
   }
 
   run(): void {
@@ -38,11 +44,11 @@ export default class OrganiseThis {
     }
 
     // check if any have 100% fitness
+    this._iterations = 0;
     for (const calendar of calendars) {
-      const fitness = calendar.fitness;
-      if (fitness === 1) {
+      this._iterations++;
+      if (calendar.fitness === 1) {
         this._bestCalendar = calendar;
-        this._bestCalendarFitness = fitness;
         return;
       }
     }

@@ -53,4 +53,16 @@ export class Span {
     const copy = JSON.parse(JSON.stringify(this)) as Span;
     return copy;
   }
+
+  public toString(): string {
+    const peopleToString: string[] = [];
+    if (this._person) {
+      peopleToString.push(this._person.toString());
+    }
+    return `Span Id: ${this._id}
+  Span Evaluated: ${this._fitness ? 'Yes' : 'No'}
+  Span Fitness: ${this._fitness}
+  People:
+${peopleToString.join('\n')}`;
+  }
 }

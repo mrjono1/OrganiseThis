@@ -17,8 +17,8 @@ export class Calendar {
   }
 
   private newCalendar() {
-    for (const span of this._settings.spans) {
-      const day = new Day(0, this._settings, span);
+    for (let index = 0; index < this._settings.spans.length; index++) {
+      const day = new Day(index, this._settings, this._settings.spans[index]);
       this._days.push(day);
     }
   }
@@ -27,8 +27,11 @@ export class Calendar {
     return this._id;
   }
   evaluate(): void {
-    // TODO: evaluate properly
-    this._fitness = 1;
+    let dayFitness = 0;
+    for (const day of this._days) {
+      dayFitness += day.fitness;
+    }
+    this._fitness = dayFitness / this._days.length;
   }
 
   get fitness(): number {
@@ -37,5 +40,19 @@ export class Calendar {
     }
 
     return this._fitness || 0;
+  }
+
+  public toString(): string {
+    const daysToString: string[] = [];
+    if (this._days) {
+      for (const day of this._days) {
+        daysToString.push(day.toString());
+      }
+    }
+    return `Calendar Id: ${this._id}
+Calendar Evaluated: ${this._fitness ? 'Yes' : 'No'}
+Calendar Fitness: ${this._fitness}${this._fitness === 1 ? ' (Best Possible Result)' : ''}
+Days:
+${daysToString.join('\n')}`;
   }
 }

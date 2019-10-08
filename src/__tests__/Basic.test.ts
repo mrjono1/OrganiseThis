@@ -22,4 +22,15 @@ const basic = new OrganiseThis('Basic', settings);
 
 test('Basic', () => {
   basic.run();
+
+  // This has no restrictions, just that each shift must be filled
+
+  expect(basic.iterations).toBe(1);
+  expect(basic.bestCalendar).toBeDefined();
+  if (!basic.bestCalendar) {
+    return;
+  }
+  expect(basic.bestCalendar.fitness).toBe(1);
+
+  console.log(basic.bestCalendar.toString());
 });

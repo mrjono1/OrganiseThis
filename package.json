@@ -11,7 +11,7 @@
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "eslint",
-    "test": "jest --config jestconfig.json"
+    "test": "jest --config jest.config.js"
   },
   "dependencies": {},
   "devDependencies": {
@@ -24,5 +24,8 @@
     "ts-jest": "^24.1.0",
     "typescript": "^3.4.3",
     "yarn": "^1.17.3"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }

@@ -37,7 +37,9 @@ export class Day {
     if (!this._span) {
       // if there is no span set then there is nothing wrong
       this._fitness = 1;
+      return;
     }
+    this._fitness = this._span.fitness;
   }
 
   get fitness(): number {
@@ -46,5 +48,17 @@ export class Day {
     }
 
     return this._fitness || 0;
+  }
+
+  public toString(): string {
+    const spansToString: string[] = [];
+    if (this._span) {
+      spansToString.push(this._span.toString());
+    }
+    return `Day Id: ${this._id}
+  Day Evaluated: ${this._fitness ? 'Yes' : 'No'}
+  Day Fitness: ${this._fitness}
+  Span:
+${spansToString.join('\n')}`;
   }
 }

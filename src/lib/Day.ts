@@ -33,6 +33,7 @@ export class Day {
     const copy = JSON.parse(JSON.stringify(this)) as Day;
     return copy;
   }
+
   evaluate(): void {
     if (!this._span) {
       // if there is no span set then there is nothing wrong
@@ -43,7 +44,7 @@ export class Day {
   }
 
   get fitness(): number {
-    if (!this._fitness) {
+    if (this._fitness === undefined) {
       this.evaluate();
     }
 

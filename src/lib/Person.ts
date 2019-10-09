@@ -25,7 +25,7 @@ export class Person {
   }
   get fitness(): number {
     // todo in future person settings will influence this section
-    if (!this._fitness) {
+    if (this._fitness === undefined) {
       this.evaluate();
     }
 

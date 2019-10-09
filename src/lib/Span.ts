@@ -35,7 +35,7 @@ export class Span {
   }
   get fitness(): number {
     // todo in future span settings will influence this section
-    if (!this._fitness) {
+    if (this._fitness === undefined) {
       this.evaluate();
     }
 
@@ -47,7 +47,7 @@ export class Span {
       this._fitness = 1;
     }
 
-    this._fitness = 0;
+    this._fitness = 1;
   }
   public copy(): Span {
     const copy = JSON.parse(JSON.stringify(this)) as Span;

@@ -35,7 +35,7 @@ export class Calendar {
   }
 
   get fitness(): number {
-    if (!this._fitness) {
+    if (this._fitness === undefined) {
       this.evaluate();
     }
 

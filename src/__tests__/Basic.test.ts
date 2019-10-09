@@ -2,21 +2,15 @@ import OrganiseThis from '../lib/OrganiseThis';
 import { SpanSetting, PersonSetting } from '../settings/';
 import { Settings } from '../settings/Settings';
 
-const settings = new Settings();
+const people: PersonSetting[] = [{ id: 1, name: 'Steve' }, { id: 2, name: 'Bob' }];
 
-const steve = new PersonSetting(1, 'Steve');
-const bob = new PersonSetting(2, 'Bob');
+const spans: SpanSetting[] = [
+  { id: 1, date: new Date(2019, 1, 1) },
+  { id: 2, date: new Date(2019, 1, 2) },
+  { id: 3, date: new Date(2019, 1, 3) }
+];
 
-settings.people.push(steve);
-settings.people.push(bob);
-
-const shift1 = new SpanSetting(1, new Date(2019, 1, 1));
-const shift2 = new SpanSetting(2, new Date(2019, 1, 2));
-const shift3 = new SpanSetting(3, new Date(2019, 1, 3));
-
-settings.spans.push(shift1);
-settings.spans.push(shift2);
-settings.spans.push(shift3);
+const settings: Settings = { spans, people };
 
 const basic = new OrganiseThis('Basic', settings);
 

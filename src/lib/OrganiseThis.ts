@@ -25,6 +25,10 @@ export default class OrganiseThis {
     return this._iterations || 0;
   }
 
+  public get setting(): Settings {
+    return this._settings;
+  }
+
   public toString(): string {
     if (!this._bestCalendar) {
       return 'No Canidate Calenders found';

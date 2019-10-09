@@ -2,19 +2,25 @@ import OrganiseThis from '../lib/OrganiseThis';
 import { SpanSetting, PersonSetting } from '../settings/';
 import { Settings } from '../settings/Settings';
 
-const settings = new Settings();
+const people: PersonSetting[] = [{ id: 1, name: 'Steve' }, { id: 2, name: 'Bob' }];
 
-const steve = new PersonSetting(1, 'Steve');
-const bob = new PersonSetting(2, 'Bob');
+const spans: SpanSetting[] = [
+  { id: 1, date: new Date(2019, 1, 1) },
+  { id: 2, date: new Date(2019, 1, 2) },
+  { id: 3, date: new Date(2019, 1, 3) }
+];
 
-settings.people.push(steve);
-settings.people.push(bob);
+const settings: Settings = { spans, people };
 
 const basic = new OrganiseThis('Settings', settings);
 
 test('Settings', () => {
   expect(basic.name).toBe('Settings');
 
-  expect(steve.name).toBe('Steve');
-  expect(bob.name).toBe('Bob');
+  expect(basic.setting.people[0].name).toBe('Steve');
+  expect(basic.setting.people[1].name).toBe('Bob');
+
+  expect(basic.setting.spans[0].date).toStrictEqual(new Date(2019, 1, 1));
+  expect(basic.setting.spans[1].date).toStrictEqual(new Date(2019, 1, 2));
+  expect(basic.setting.spans[2].date).toStrictEqual(new Date(2019, 1, 3));
 });

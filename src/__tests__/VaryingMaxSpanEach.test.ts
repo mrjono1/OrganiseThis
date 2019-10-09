@@ -2,14 +2,13 @@ import OrganiseThis from '../lib/OrganiseThis';
 import { SpanSetting, PersonSetting, Availability } from '../settings';
 import { Settings } from '../settings/Settings';
 
+//'https://stackoverflow.com/a/37682352/3308772';
 const availability: Availability = { maxNumberOfSpans: 1 };
 
 const people: PersonSetting[] = [
-  { id: 1, name: 'Steve', availability },
-  { id: 2, name: 'Bob', availability },
-  { id: 3, name: 'Jen', availability },
-  { id: 4, name: 'Simon', availability },
-  { id: 5, name: 'Greg', availability }
+  { id: 1, name: 'Steve', availability: { maxNumberOfSpans: 1 } },
+  { id: 2, name: 'Bob', availability: { maxNumberOfSpans: 2 } },
+  { id: 3, name: 'Jen', availability: { maxNumberOfSpans: 5 } }
 ];
 
 const spans: SpanSetting[] = [
@@ -23,7 +22,7 @@ const spans: SpanSetting[] = [
 const settings: Settings = { spans, people };
 const basic = new OrganiseThis('Basic', settings);
 
-test('OneSpanEach', () => {
+test('VaryingMaxSpanEach', () => {
   basic.run();
 
   // People can only have one shift each

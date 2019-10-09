@@ -1,3 +1,3 @@
-export class Availability {
-  public maxNumberOfSpans?: number;
+export interface Availability {
+  maxNumberOfSpans?: number;
 }

@@ -1,6 +1,6 @@
 import { PersonSetting, SpanSetting } from '.';
 
-export class Settings {
-  public people: PersonSetting[] = [];
-  public spans: SpanSetting[] = [];
+export interface Settings {
+  people: PersonSetting[];
+  spans: SpanSetting[];
 }

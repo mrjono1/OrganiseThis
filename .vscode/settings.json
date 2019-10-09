@@ -1,4 +1,13 @@
 {
-    "npm.packageManager": "yarn",
-    "eslint.packageManager": "yarn"
+  "npm.packageManager": "yarn",
+  "eslint.packageManager": "yarn",
+  "eslint.autoFixOnSave": true,
+  "eslint.validate": ["javascript", "javascriptreact", { "language": "typescript", "autoFix": true }],
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.formatOnSave": false
+  },
+  "[typescript]": {
+    "editor.formatOnSave": false
+  }
 }

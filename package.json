@@ -10,20 +10,24 @@
   "scripts": {
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
-    "lint": "eslint",
-    "test": "jest --config jest.config.js"
+    "lint": "eslint 'src/**'",
+    "test": "yarn test-verbose --silent",
+    "test-verbose": "jest --config jest.config.js"
   },
   "dependencies": {},
   "devDependencies": {
-    "@types/node": "^12.6.2",
     "@types/jest": "^24.0.18",
+    "@types/node": "^12.7.12",
+    "@typescript-eslint/eslint-plugin": "^2.3.3",
+    "@typescript-eslint/parser": "^2.3.3",
+    "eslint": "^6.5.1",
+    "eslint-config-prettier": "^6.4.0",
+    "eslint-plugin-prettier": "^3.1.1",
     "jest": "^24.9.0",
-    "eslint": "6.1.0",
-    "eslint-config-prettier": "6.3.0",
-    "prettier": "1.18.2",
+    "prettier": "^1.18.2",
     "ts-jest": "^24.1.0",
-    "typescript": "^3.4.3",
-    "yarn": "^1.17.3"
+    "typescript": "^3.6.4",
+    "yarn": "^1.19.1"
   },
   "jest": {
     "testEnvironment": "node"

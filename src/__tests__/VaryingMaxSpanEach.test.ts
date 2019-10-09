@@ -1,9 +1,8 @@
 import OrganiseThis from '../lib/OrganiseThis';
-import { SpanSetting, PersonSetting, Availability } from '../settings';
+import { SpanSetting, PersonSetting } from '../settings';
 import { Settings } from '../settings/Settings';
 
-//'https://stackoverflow.com/a/37682352/3308772';
-const availability: Availability = { maxNumberOfSpans: 1 };
+// 'https://stackoverflow.com/a/37682352/3308772';
 
 const people: PersonSetting[] = [
   { id: 1, name: 'Steve', availability: { maxNumberOfSpans: 1 } },

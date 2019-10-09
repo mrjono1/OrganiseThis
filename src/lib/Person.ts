@@ -1,5 +1,5 @@
 ﻿import { Settings } from '../settings/Settings';
-import { PersonSetting, SpanSetting } from '../settings';
+import { PersonSetting } from '../settings';
 
 export class Person {
   private _id: number;
@@ -16,7 +16,7 @@ export class Person {
     this.newPerson();
   }
 
-  private newPerson() {
+  private newPerson(): void {
     // todo in future person settings will influence this section
   }
 

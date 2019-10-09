@@ -20,7 +20,7 @@ export class Span {
     this.newSpan();
   }
 
-  private newSpan() {
+  private newSpan(): void {
     // todo in future span settings will influence this section
 
     // random person

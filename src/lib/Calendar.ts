@@ -16,7 +16,7 @@ export class Calendar {
     this.newCalendar();
   }
 
-  private newCalendar() {
+  private newCalendar(): void {
     for (let index = 0; index < this._settings.spans.length; index++) {
       const day = new Day(index, this._settings, this._settings.spans[index]);
       this._days.push(day);

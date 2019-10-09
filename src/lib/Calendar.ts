@@ -31,7 +31,24 @@ export class Calendar {
     for (const day of this._days) {
       dayFitness += day.fitness;
     }
-    this._fitness = dayFitness / this._days.length;
+    let fitness = dayFitness / this._days.length;
+
+    // Person settings
+    for (const personSetting of this._settings.people) {
+      if (personSetting.availability && personSetting.availability.maxNumberOfSpans !== undefined) {
+        let numberOfSpans = 0;
+        for (const day of this._days) {
+          if (day.span && day.span.person && day.span.person.settings.id === personSetting.id) {
+            numberOfSpans++;
+          }
+        }
+        if (numberOfSpans > personSetting.availability.maxNumberOfSpans) {
+          fitness--;
+        }
+      }
+    }
+
+    this._fitness = fitness;
   }
 
   get fitness(): number {

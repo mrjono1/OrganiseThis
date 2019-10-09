@@ -5,7 +5,7 @@ export class Person {
   private _id: number;
   private _settings: Settings;
 
-  private _personSettings?: PersonSetting;
+  private _personSettings: PersonSetting;
 
   private _fitness?: number;
 
@@ -31,6 +31,11 @@ export class Person {
 
     return this._fitness || 0;
   }
+
+  get settings(): PersonSetting {
+    return this._personSettings;
+  }
+
   evaluate(): void {
     this._fitness = 1;
   }

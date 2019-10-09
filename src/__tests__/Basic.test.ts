@@ -31,6 +31,4 @@ test('Basic', () => {
     return;
   }
   expect(basic.bestCalendar.fitness).toBe(1);
-
-  console.log(basic.bestCalendar.toString());
 });

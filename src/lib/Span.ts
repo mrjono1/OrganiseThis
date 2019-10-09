@@ -26,13 +26,16 @@ export class Span {
     // random person
 
     const position = Math.floor(Math.random() * (this._settings.people.length + 1));
-    const person = this._settings.people[position];
-    this._person = new Person(0, this._settings, person);
+    const personSetting = this._settings.people[position];
+    if (personSetting) {
+      this._person = new Person(0, this._settings, personSetting);
+    }
   }
 
   get id(): number {
     return this._id;
   }
+
   get fitness(): number {
     // todo in future span settings will influence this section
     if (this._fitness === undefined) {
@@ -41,14 +44,21 @@ export class Span {
 
     return this._fitness || 0;
   }
+
+  get person(): Person | undefined {
+    return this._person;
+  }
+
   evaluate(): void {
     if (!this._person) {
       // if there is no person set then there is nothing wrong
       this._fitness = 1;
+      return;
     }
 
-    this._fitness = 1;
+    this._fitness = this._person.fitness;
   }
+
   public copy(): Span {
     const copy = JSON.parse(JSON.stringify(this)) as Span;
     return copy;

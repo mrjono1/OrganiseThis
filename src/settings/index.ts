@@ -1,4 +1,5 @@
 import { PersonSetting } from './PersonSetting';
 import { SpanSetting } from './SpanSetting';
+import { Availability } from './Availability';
 
-export { PersonSetting, SpanSetting };
+export { Availability, PersonSetting, SpanSetting };

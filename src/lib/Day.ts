@@ -51,6 +51,10 @@ export class Day {
     return this._fitness || 0;
   }
 
+  get span(): Span | undefined {
+    return this._span;
+  }
+
   public toString(): string {
     const spansToString: string[] = [];
     if (this._span) {

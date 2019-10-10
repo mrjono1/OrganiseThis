@@ -1,5 +1,6 @@
 import { Calendar } from './Calendar';
 import { Settings } from '../settings/Settings';
+import { DefaultSettings } from '../defaults';
 
 export default class OrganiseThis {
   private _name: string;
@@ -8,9 +9,12 @@ export default class OrganiseThis {
   private _bestCalendar?: Calendar;
   private _iterations?: number;
 
-  constructor(name: string, settings: Settings) {
+  constructor(name: string, settings: Partial<Settings>) {
     this._name = name;
-    this._settings = settings;
+    this._settings = {
+      ...DefaultSettings,
+      ...settings
+    };
   }
 
   public get name(): string {
@@ -56,5 +60,11 @@ ${this._bestCalendar.toString()}`;
         return;
       }
     }
+
+    const sortedCalendars = calendars.sort((a: Calendar, b: Calendar) => {
+      return b.fitness - a.fitness;
+    });
+
+    this._bestCalendar = sortedCalendars[0];
   }
 }

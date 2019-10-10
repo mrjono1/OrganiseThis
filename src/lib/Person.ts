@@ -45,7 +45,7 @@ export class Person {
   }
 
   public toString(): string {
-    return `Person Id: ${this._id}, Setting Id: ${this._personSettings.id}
-    Person Fitness: ${this._fitness}`;
+    return `      Person Id: ${this._id}, Setting Id: ${this._personSettings.id}, ${this._personSettings.name}
+      Person Fitness: ${this._fitness}`;
   }
 }

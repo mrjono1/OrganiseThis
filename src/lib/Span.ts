@@ -1,6 +1,7 @@
 ﻿import { Settings } from '../settings/Settings';
 import { PersonSetting, SpanSetting } from '../settings';
 import { Person } from './Person';
+import { randomItem } from '../helpers/random';
 
 export class Span {
   private _id: number;
@@ -13,23 +14,23 @@ export class Span {
 
   private _fitness?: number;
 
-  constructor(id: number, settings: Settings, spanSettings: SpanSetting) {
+  constructor(id: number, settings: Settings, spanSettings: SpanSetting, personSettings?: PersonSetting) {
     this._id = id;
     this._settings = settings;
     this._spanSettings = spanSettings;
+    this._personSettings = personSettings;
     this.newSpan();
   }
 
   private newSpan(): void {
     // todo in future span settings will influence this section
 
-    // random person
-
-    const position = Math.floor(Math.random() * (this._settings.personSettings.length + 1));
-    const personSetting = this._settings.personSettings[position];
-    if (personSetting) {
-      this._person = new Person(0, this._settings, personSetting);
+    // random person if not passed a person
+    if (!this._personSettings) {
+      this._personSettings = randomItem(this._settings.personSettings);
     }
+
+    this._person = new Person(0, this._settings, this._personSettings);
   }
 
   get id(): number {
@@ -69,9 +70,9 @@ export class Span {
     if (this._person) {
       peopleToString.push(this._person.toString());
     }
-    return `Span Id: ${this._id}, Setting Id: ${this._spanSettings.id}
-  Span Fitness: ${this._fitness}
-  People:
+    return `    Span Id: ${this._id}, Setting Id: ${this._spanSettings.id}, ${this._spanSettings.name}
+    Span Fitness: ${this._fitness}
+    People:
 ${peopleToString.join('\n')}`;
   }
 }

@@ -1,5 +1,6 @@
 ﻿import { Span } from './Span';
 import { Settings, DaySetting } from '../settings';
+import { randomIndexAndItem } from '../helpers/random';
 
 export class Day {
   private _id: number;
@@ -20,14 +21,27 @@ export class Day {
 
   newDay(): void {
     // Default span if none defined
-    if (!this._daySetting.spans) {
+    if (!this._daySetting.spanSettings) {
       this._spans.push(new Span(0, this._settings, { id: 0 }));
       return;
     }
 
-    for (let index = 0; index < this._daySetting.spans.length; index++) {
-      const span = new Span(index, this._settings, this._daySetting.spans[index]);
-      this._spans.push(span);
+    let spanId = 1;
+    if (!this._settings.oneSpanPerDay) {
+      for (const spanSetting of this._daySetting.spanSettings) {
+        const span = new Span(spanId++, this._settings, spanSetting);
+        this._spans.push(span);
+      }
+    } else {
+      const personIndexesUsed: number[] = [];
+      for (const spanSetting of this._daySetting.spanSettings) {
+        const { index, item } = randomIndexAndItem(this._settings.personSettings, personIndexesUsed);
+        if (item) {
+          const span = new Span(spanId++, this._settings, spanSetting, item);
+          personIndexesUsed.push(index);
+          this._spans.push(span);
+        }
+      }
     }
   }
 

@@ -19,7 +19,7 @@ const daySettings: DaySetting[] = [
   { id: 5, weekday: Weekday.Friday }
 ];
 
-const settings: Settings = { daySettings, personSettings: peopleSettings };
+const settings: Partial<Settings> = { daySettings, personSettings: peopleSettings };
 const basic = new OrganiseThis('Basic', settings);
 
 test('VaryingMaxSpanEach', () => {

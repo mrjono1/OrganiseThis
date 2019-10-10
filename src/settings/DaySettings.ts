@@ -4,5 +4,5 @@ import { SpanSetting } from '.';
 export interface DaySettings {
   id: number;
   weekday?: Weekday;
-  spans?: SpanSetting[];
+  spanSettings?: SpanSetting[];
 }

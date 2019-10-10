@@ -11,7 +11,7 @@ const daySettings: DaySetting[] = [
   { id: 3, weekday: Weekday.Wednesday }
 ];
 
-const settings: Settings = { daySettings, personSettings: peopleSettings };
+const settings: Partial<Settings> = { daySettings, personSettings: peopleSettings };
 
 const basic = new OrganiseThis('Basic', settings);
 

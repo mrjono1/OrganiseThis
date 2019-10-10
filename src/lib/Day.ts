@@ -75,8 +75,7 @@ export class Day {
       }
     }
 
-    return `Day Id: ${this._id}
-  Day Evaluated: ${this._fitness ? 'Yes' : 'No'}
+    return `Day Id: ${this._id}, Setting Id: ${this._daySetting.id}
   Day Fitness: ${this._fitness}
   Spans:
 ${spansToString.join('\n')}`;

@@ -69,8 +69,7 @@ export class Span {
     if (this._person) {
       peopleToString.push(this._person.toString());
     }
-    return `Span Id: ${this._id}
-  Span Evaluated: ${this._fitness ? 'Yes' : 'No'}
+    return `Span Id: ${this._id}, Setting Id: ${this._spanSettings.id}
   Span Fitness: ${this._fitness}
   People:
 ${peopleToString.join('\n')}`;

@@ -6,6 +6,8 @@ export class Calendar {
   private _settings: Settings;
   private _days: Day[];
 
+  private _dayIdCounter = 0;
+
   private _fitness?: number;
 
   constructor(id: number, settings: Settings) {
@@ -17,8 +19,8 @@ export class Calendar {
   }
 
   private newCalendar(): void {
-    for (let index = 0; index < this._settings.daySettings.length; index++) {
-      const day = new Day(index, this._settings, this._settings.daySettings[index]);
+    for (const daySetting of this._settings.daySettings) {
+      const day = new Day(this._dayIdCounter++, this._settings, daySetting);
       this._days.push(day);
     }
   }
@@ -69,7 +71,6 @@ export class Calendar {
       }
     }
     return `Calendar Id: ${this._id}
-Calendar Evaluated: ${this._fitness ? 'Yes' : 'No'}
 Calendar Fitness: ${this._fitness}${this._fitness === 1 ? ' (Best Possible Result)' : ''}
 Days:
 ${daysToString.join('\n')}`;

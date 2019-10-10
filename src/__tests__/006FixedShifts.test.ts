@@ -3,61 +3,40 @@ import { DaySetting, PersonSetting } from '../settings';
 import { Settings } from '../settings/Settings';
 import { Weekday } from '../types';
 
-const peopleSettings: PersonSetting[] = [
-  { id: 1, name: 'Steve' },
-  { id: 2, name: 'Bob' },
-  { id: 3, name: 'Jen' },
-  { id: 4, name: 'Simon', availability: { maxNumberOfSpans: 1 } },
-  { id: 5, name: 'Greg' }
-];
-
-let spanId = 1;
 const daySettings: DaySetting[] = [
   {
     id: 1,
     weekday: Weekday.Monday,
-    spanSettings: [
-      { id: spanId++, name: 'Early' },
-      { id: spanId++, name: 'Midday' },
-      { id: spanId++, name: 'Afternoon' }
-    ]
+    spanSettings: [{ id: 1, name: 'Open' }, { id: 2, name: 'Midday' }, { id: 3, name: 'Afternoon' }]
   },
   {
     id: 2,
     weekday: Weekday.Tuesday,
-    spanSettings: [
-      { id: spanId++, name: 'Early' },
-      { id: spanId++, name: 'Midday' },
-      { id: spanId++, name: 'Afternoon' }
-    ]
+    spanSettings: [{ id: 4, name: 'Open' }, { id: 5, name: 'Midday' }, { id: 6, name: 'Afternoon' }]
   },
   {
     id: 3,
     weekday: Weekday.Wednesday,
-    spanSettings: [
-      { id: spanId++, name: 'Early' },
-      { id: spanId++, name: 'Midday' },
-      { id: spanId++, name: 'Afternoon' }
-    ]
+    spanSettings: [{ id: 7, name: 'Open' }, { id: 8, name: 'Midday' }, { id: 9, name: 'Afternoon' }]
   },
   {
     id: 4,
     weekday: Weekday.Thursday,
-    spanSettings: [
-      { id: spanId++, name: 'Early' },
-      { id: spanId++, name: 'Midday' },
-      { id: spanId++, name: 'Afternoon' }
-    ]
+    spanSettings: [{ id: 10, name: 'Open' }, { id: 11, name: 'Midday' }, { id: 12, name: 'Afternoon' }]
   },
   {
     id: 5,
     weekday: Weekday.Friday,
-    spanSettings: [
-      { id: spanId++, name: 'Early' },
-      { id: spanId++, name: 'Midday' },
-      { id: spanId++, name: 'Afternoon' }
-    ]
+    spanSettings: [{ id: 13, name: 'Open' }, { id: 14, name: 'Midday' }, { id: 15, name: 'Afternoon' }]
   }
+];
+
+const peopleSettings: PersonSetting[] = [
+  { id: 1, name: 'Steve', fixedShiftsIds: [1, 4, 7, 10, 13] },
+  { id: 2, name: 'Bob' },
+  { id: 3, name: 'Jen' },
+  { id: 4, name: 'Simon', availability: { maxNumberOfSpans: 1 } },
+  { id: 5, name: 'Greg' }
 ];
 
 const settings: Partial<Settings> = { daySettings, personSettings: peopleSettings };

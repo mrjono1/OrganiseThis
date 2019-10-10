@@ -1,6 +1,7 @@
 ﻿import { Span } from './Span';
-import { Settings, DaySetting } from '../settings';
+import { Settings, DaySetting, PersonSetting } from '../settings';
 import { randomIndexAndItem } from '../helpers/random';
+import { Weekday } from '../types';
 
 export class Day {
   private _id: number;
@@ -27,22 +28,42 @@ export class Day {
     }
 
     let spanId = 1;
-    if (!this._settings.oneSpanPerDay) {
-      for (const spanSetting of this._daySetting.spanSettings) {
-        const span = new Span(spanId++, this._settings, spanSetting);
-        this._spans.push(span);
-      }
-    } else {
-      const personIndexesUsed: number[] = [];
-      for (const spanSetting of this._daySetting.spanSettings) {
+    const personIndexesUsed: number[] = [];
+    for (const spanSetting of this._daySetting.spanSettings) {
+      let personSettingItem: PersonSetting | undefined = undefined;
+      let personSettingIndex: number | undefined = undefined;
+
+      const { fixedPersonIndex, fixedPersonItem } = this.fixedPerson(spanSetting.id);
+      personSettingItem = fixedPersonItem;
+      personSettingIndex = fixedPersonIndex;
+
+      if (personSettingItem === undefined && this._settings.oneSpanPerDay) {
         const { index, item } = randomIndexAndItem(this._settings.personSettings, personIndexesUsed);
-        if (item) {
-          const span = new Span(spanId++, this._settings, spanSetting, item);
-          personIndexesUsed.push(index);
-          this._spans.push(span);
-        }
+        personSettingItem = item;
+        personSettingIndex = index;
+      }
+
+      const span = new Span(spanId++, this._settings, spanSetting, personSettingItem);
+      this._spans.push(span);
+
+      if (personSettingIndex) {
+        personIndexesUsed.push(personSettingIndex);
       }
     }
+  }
+
+  private fixedPerson(spanSettingId: number): { fixedPersonIndex?: number; fixedPersonItem?: PersonSetting } {
+    for (let index = 0; index < this._settings.personSettings.length; index++) {
+      const personSetting = this._settings.personSettings[index];
+      if (!personSetting.fixedShiftsIds) {
+        continue;
+      }
+      const matched = personSetting.fixedShiftsIds.find((id: number) => id === spanSettingId);
+      if (matched) {
+        return { fixedPersonIndex: index, fixedPersonItem: personSetting };
+      }
+    }
+    return { fixedPersonIndex: undefined, fixedPersonItem: undefined };
   }
 
   get id(): number {
@@ -89,7 +110,8 @@ export class Day {
       }
     }
 
-    return `Day Id: ${this._id}, Setting Id: ${this._daySetting.id}
+    const name = this._daySetting.weekday ? Weekday[this._daySetting.weekday].toString() : '';
+    return `Day Id: ${this._id}, Setting Id: ${this._daySetting.id}, ${name}
   Day Fitness: ${this._fitness}
   Spans:
 ${spansToString.join('\n')}`;

@@ -1,6 +1,6 @@
-import { PersonSetting, SpanSetting } from '.';
+import { PersonSetting, DaySetting } from '.';
 
 export interface Settings {
-  people: PersonSetting[];
-  spans: SpanSetting[];
+  personSettings: PersonSetting[];
+  daySettings: DaySetting[];
 }

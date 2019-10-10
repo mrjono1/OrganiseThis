@@ -17,8 +17,8 @@ export class Calendar {
   }
 
   private newCalendar(): void {
-    for (let index = 0; index < this._settings.spans.length; index++) {
-      const day = new Day(index, this._settings, this._settings.spans[index]);
+    for (let index = 0; index < this._settings.daySettings.length; index++) {
+      const day = new Day(index, this._settings, this._settings.daySettings[index]);
       this._days.push(day);
     }
   }
@@ -34,12 +34,14 @@ export class Calendar {
     let fitness = dayFitness / this._days.length;
 
     // Person settings
-    for (const personSetting of this._settings.people) {
+    for (const personSetting of this._settings.personSettings) {
       if (personSetting.availability && personSetting.availability.maxNumberOfSpans !== undefined) {
         let numberOfSpans = 0;
         for (const day of this._days) {
-          if (day.span && day.span.person && day.span.person.settings.id === personSetting.id) {
-            numberOfSpans++;
+          for (const span of day.spans) {
+            if (span.person && span.person.settings.id === personSetting.id) {
+              numberOfSpans++;
+            }
           }
         }
         if (numberOfSpans > personSetting.availability.maxNumberOfSpans) {

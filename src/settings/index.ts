@@ -1,5 +1,13 @@
-import { PersonSetting } from './PersonSetting';
-import { SpanSetting } from './SpanSetting';
+import { PersonSettings } from './PersonSettings';
+import { SpanSettings } from './SpanSettings';
 import { Availability } from './Availability';
+import { DaySettings } from './DaySettings';
+import { Settings } from './Settings';
 
-export { Availability, PersonSetting, SpanSetting };
+export {
+  Availability,
+  DaySettings as DaySetting,
+  PersonSettings as PersonSetting,
+  SpanSettings as SpanSetting,
+  Settings
+};

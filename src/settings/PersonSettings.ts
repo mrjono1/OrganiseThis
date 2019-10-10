@@ -1,6 +1,6 @@
 import { Availability } from '.';
 
-export interface PersonSetting {
+export interface PersonSettings {
   id: number;
   name: string;
   availability?: Availability;

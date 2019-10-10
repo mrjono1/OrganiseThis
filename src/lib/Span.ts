@@ -25,8 +25,8 @@ export class Span {
 
     // random person
 
-    const position = Math.floor(Math.random() * (this._settings.people.length + 1));
-    const personSetting = this._settings.people[position];
+    const position = Math.floor(Math.random() * (this._settings.personSettings.length + 1));
+    const personSetting = this._settings.personSettings[position];
     if (personSetting) {
       this._person = new Person(0, this._settings, personSetting);
     }

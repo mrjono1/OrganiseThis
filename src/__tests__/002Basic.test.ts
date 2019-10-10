@@ -1,16 +1,17 @@
 import OrganiseThis from '../lib/OrganiseThis';
-import { SpanSetting, PersonSetting } from '../settings/';
+import { DaySetting, PersonSetting } from '../settings';
 import { Settings } from '../settings/Settings';
+import { Weekday } from '../types';
 
-const people: PersonSetting[] = [{ id: 1, name: 'Steve' }, { id: 2, name: 'Bob' }];
+const peopleSettings: PersonSetting[] = [{ id: 1, name: 'Steve' }, { id: 2, name: 'Bob' }];
 
-const spans: SpanSetting[] = [
-  { id: 1, date: new Date(2019, 1, 1) },
-  { id: 2, date: new Date(2019, 1, 2) },
-  { id: 3, date: new Date(2019, 1, 3) }
+const daySettings: DaySetting[] = [
+  { id: 1, weekday: Weekday.Monday },
+  { id: 2, weekday: Weekday.Tuesday },
+  { id: 3, weekday: Weekday.Wednesday }
 ];
 
-const settings: Settings = { spans, people };
+const settings: Settings = { daySettings, personSettings: peopleSettings };
 
 const basic = new OrganiseThis('Basic', settings);
 

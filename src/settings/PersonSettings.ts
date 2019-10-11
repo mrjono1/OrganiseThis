@@ -5,4 +5,5 @@ export interface PersonSettings {
   name: string;
   availability?: Availability;
   fixedShiftsIds?: number[];
+  unavailableShiftIds?: number[];
 }

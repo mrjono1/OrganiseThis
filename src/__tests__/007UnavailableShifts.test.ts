@@ -33,7 +33,7 @@ const daySettings: DaySetting[] = [
 
 const peopleSettings: PersonSetting[] = [
   { id: 1, name: 'Steve', fixedShiftsIds: [1, 4, 7, 10, 13] },
-  { id: 2, name: 'Bob' },
+  { id: 2, name: 'Bob', unavailableShiftIds: [2, 5] },
   { id: 3, name: 'Jen' },
   { id: 4, name: 'Simon', availability: { maxNumberOfSpans: 1 } },
   { id: 5, name: 'Greg' }
@@ -42,7 +42,7 @@ const peopleSettings: PersonSetting[] = [
 const settings: Partial<Settings> = { daySettings, personSettings: peopleSettings };
 const organiseThis = new OrganiseThis('Basic', settings);
 
-test('006FixedShifts', () => {
+test('007UnavailableShifts', () => {
   organiseThis.run();
 
   // People can only have one shift each

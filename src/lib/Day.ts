@@ -38,7 +38,8 @@ export class Day {
       personSettingIndex = fixedPersonIndex;
 
       if (personSettingItem === undefined && this._settings.oneSpanPerDay) {
-        const { index, item } = randomIndexAndItem(this._settings.personSettings, personIndexesUsed);
+        const usedIndexes = this.getUnavailablePersonIndexes(spanSetting.id).concat(personIndexesUsed);
+        const { index, item } = randomIndexAndItem(this._settings.personSettings, usedIndexes);
         personSettingItem = item;
         personSettingIndex = index;
       }
@@ -64,6 +65,22 @@ export class Day {
       }
     }
     return { fixedPersonIndex: undefined, fixedPersonItem: undefined };
+  }
+
+  private getUnavailablePersonIndexes(spanSettingId: number): number[] {
+    const indexes: number[] = [];
+    for (let index = 0; index < this._settings.personSettings.length; index++) {
+      const personSetting = this._settings.personSettings[index];
+      if (!personSetting.unavailableShiftIds || personSetting.unavailableShiftIds.length === 0) {
+        continue;
+      }
+      for (const id of personSetting.unavailableShiftIds) {
+        if (id === spanSettingId) {
+          indexes.push(id);
+        }
+      }
+    }
+    return indexes;
   }
 
   get id(): number {

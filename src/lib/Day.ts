@@ -93,12 +93,6 @@ export class Day {
   }
 
   evaluate(): void {
-    if (!this._spans || this._spans.length === 0) {
-      // if there is no span set then there is nothing wrong
-      this._fitness = 1;
-      return;
-    }
-
     let dayFitness = 0;
     for (const span of this._spans) {
       dayFitness += span.fitness;

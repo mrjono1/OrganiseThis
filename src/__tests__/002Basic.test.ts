@@ -26,4 +26,6 @@ test('Basic', () => {
     return;
   }
   expect(basic.bestCalendar.fitness).toBe(1);
+
+  expect(basic.toString()).not.toContain('[object Object]');
 });

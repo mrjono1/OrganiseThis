@@ -1,15 +1,14 @@
-﻿import { Settings } from '../settings/Settings';
-import { PersonSetting } from '../settings';
+﻿import { Settings, PersonSettings } from '../settings';
 
 export class Person {
   private _id: number;
   private _settings: Settings;
 
-  private _personSettings: PersonSetting;
+  private _personSettings: PersonSettings;
 
   private _fitness?: number;
 
-  constructor(id: number, settings: Settings, personSettings: PersonSetting) {
+  constructor(id: number, settings: Settings, personSettings: PersonSettings) {
     this._id = id;
     this._settings = settings;
     this._personSettings = personSettings;
@@ -32,7 +31,7 @@ export class Person {
     return this._fitness || 0;
   }
 
-  get settings(): PersonSetting {
+  get settings(): PersonSettings {
     return this._personSettings;
   }
 

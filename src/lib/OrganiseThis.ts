@@ -1,5 +1,5 @@
 import { Calendar } from './Calendar';
-import { Settings } from '../settings/Settings';
+import { Settings } from '../settings';
 import { DefaultSettings } from '../defaults';
 
 export default class OrganiseThis {

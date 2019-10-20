@@ -3,5 +3,9 @@ import { Settings } from '../settings';
 export const DefaultSettings: Settings = {
   oneSpanPerDay: true,
   daySettings: [],
-  personSettings: []
+  personSettings: [],
+  defaultSpan: {
+    id: 0,
+    name: 'All Day'
+  }
 };

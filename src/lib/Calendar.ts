@@ -1,5 +1,5 @@
 ﻿import { Day } from './Day';
-import { Settings } from '../settings/Settings';
+import { Settings } from '../settings';
 
 export class Calendar {
   private _id: number;

@@ -1,8 +1,8 @@
 import { Weekday } from '../types';
-import { SpanSetting } from '.';
+import { SpanSettings } from '.';
 
 export interface DaySettings {
   id: number;
   weekday?: Weekday;
-  spanSettings?: SpanSetting[];
+  spanSettings?: SpanSettings[];
 }

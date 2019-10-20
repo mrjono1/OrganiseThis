@@ -1,20 +1,18 @@
-﻿import { Settings } from '../settings/Settings';
-import { PersonSetting, SpanSetting } from '../settings';
+﻿import { Settings, PersonSettings, SpanSettings } from '../settings';
 import { Person } from './Person';
-import { randomItem } from '../helpers/random';
 
 export class Span {
   private _id: number;
   private _settings: Settings;
-  private _spanSettings: SpanSetting;
+  private _spanSettings: SpanSettings;
 
-  private _personSettings?: PersonSetting;
+  private _personSettings?: PersonSettings;
 
   private _person?: Person;
 
   private _fitness?: number;
 
-  constructor(id: number, settings: Settings, spanSettings: SpanSetting, personSettings?: PersonSetting) {
+  constructor(id: number, settings: Settings, spanSettings: SpanSettings, personSettings?: PersonSettings) {
     this._id = id;
     this._settings = settings;
     this._spanSettings = spanSettings;
@@ -25,12 +23,9 @@ export class Span {
   private newSpan(): void {
     // todo in future span settings will influence this section
 
-    // random person if not passed a person
-    if (!this._personSettings) {
-      this._personSettings = randomItem(this._settings.personSettings);
+    if (this._personSettings) {
+      this._person = new Person(0, this._settings, this._personSettings);
     }
-
-    this._person = new Person(0, this._settings, this._personSettings);
   }
 
   get id(): number {

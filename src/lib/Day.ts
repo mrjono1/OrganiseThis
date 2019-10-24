@@ -37,7 +37,37 @@ export class Day {
       personSettingIndex = fixedPersonIndex;
 
       if (personSettingItem === undefined && this._settings.oneSpanPerDay) {
+        // todo ensure unique list
         const usedIndexes = this.getUnavailablePersonIndexes(spanSetting.id).concat(personIndexesUsed);
+
+        // Filter out people who dont have the skill
+        if (
+          spanSetting.skillSettingIds &&
+          spanSetting.skillSettingIds.length !== 0 &&
+          this._settings.skillSettings &&
+          this._settings.skillSettings.length !== 0
+        ) {
+          for (let index = 0; index < this._settings.personSettings.length; index++) {
+            if (usedIndexes.includes(index)) {
+              continue;
+            }
+            let matched = false;
+            const personSetting = this._settings.personSettings[index];
+            if (personSetting.skillSettingIds && personSetting.skillSettingIds.length !== 0) {
+              let matchedSkillCount = 0;
+              for (const spanSkillId of spanSetting.skillSettingIds) {
+                if (personSetting.skillSettingIds.includes(spanSkillId)) {
+                  matchedSkillCount++;
+                }
+              }
+              matched = matchedSkillCount === spanSetting.skillSettingIds.length;
+            }
+            if (!matched) {
+              usedIndexes.push(index);
+            }
+          }
+        }
+
         const { index, item } = randomIndexAndItem(this._settings.personSettings, usedIndexes);
         personSettingItem = item;
         personSettingIndex = index;
@@ -46,7 +76,7 @@ export class Day {
       const span = new Span(spanId++, this._settings, spanSetting, personSettingItem);
       this._spans.push(span);
 
-      if (personSettingIndex) {
+      if (personSettingIndex !== undefined) {
         personIndexesUsed.push(personSettingIndex);
       }
     }

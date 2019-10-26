@@ -1,18 +1,18 @@
 ﻿import { Span } from './Span';
-import { Settings, DaySettings, PersonSettings } from '../settings';
+import { Settings, DaySetting, PersonSetting } from '../settings';
 import { randomIndexAndItem } from '../helpers/random';
 import { Weekday } from '../types';
 
 export class Day {
   private _id: number;
   private _settings: Settings;
-  private _daySetting: DaySettings;
+  private _daySetting: DaySetting;
 
   private _spans: Span[];
 
   private _fitness?: number;
 
-  constructor(id: number, settings: Settings, daySetting: DaySettings) {
+  constructor(id: number, settings: Settings, daySetting: DaySetting) {
     this._id = id;
     this._settings = settings;
     this._daySetting = daySetting;
@@ -29,7 +29,7 @@ export class Day {
     let spanId = 1;
     const personIndexesUsed: number[] = [];
     for (const spanSetting of this._daySetting.spanSettings) {
-      let personSettingItem: PersonSettings | undefined = undefined;
+      let personSettingItem: PersonSetting | undefined = undefined;
       let personSettingIndex: number | undefined = undefined;
 
       const { fixedPersonIndex, fixedPersonItem } = this.fixedPerson(spanSetting.id);
@@ -82,7 +82,7 @@ export class Day {
     }
   }
 
-  private fixedPerson(spanSettingId: number): { fixedPersonIndex?: number; fixedPersonItem?: PersonSettings } {
+  private fixedPerson(spanSettingId: number): { fixedPersonIndex?: number; fixedPersonItem?: PersonSetting } {
     for (let index = 0; index < this._settings.personSettings.length; index++) {
       const personSetting = this._settings.personSettings[index];
       if (!personSetting.fixedShiftsIds) {

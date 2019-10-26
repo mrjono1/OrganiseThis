@@ -1,10 +1,10 @@
 import OrganiseThis from '../lib/OrganiseThis';
-import { Settings, DaySettings, PersonSettings } from '../settings';
+import { Settings, DaySetting, PersonSetting } from '../settings';
 import { Weekday } from '../types';
 
-const peopleSettings: PersonSettings[] = [{ id: 1, name: 'Steve' }, { id: 2, name: 'Bob' }];
+const peopleSettings: PersonSetting[] = [{ id: 1, name: 'Steve' }, { id: 2, name: 'Bob' }];
 
-const daySettings: DaySettings[] = [
+const daySettings: DaySetting[] = [
   { id: 1, weekday: Weekday.Monday },
   { id: 2, weekday: Weekday.Tuesday },
   { id: 3, weekday: Weekday.Wednesday }

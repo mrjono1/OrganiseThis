@@ -1,10 +1,10 @@
 import OrganiseThis from '../lib/OrganiseThis';
-import { Settings, DaySettings, PersonSettings, Availability } from '../settings';
+import { Settings, DaySetting, PersonSetting, Availability } from '../settings';
 import { Weekday } from '../types';
 
 const availability: Availability = { maxNumberOfSpans: 1 };
 
-const peopleSettings: PersonSettings[] = [
+const peopleSettings: PersonSetting[] = [
   { id: 1, name: 'Steve', availability },
   { id: 2, name: 'Bob', availability },
   { id: 3, name: 'Jen', availability },
@@ -12,7 +12,7 @@ const peopleSettings: PersonSettings[] = [
   { id: 5, name: 'Greg', availability }
 ];
 
-const daySettings: DaySettings[] = [
+const daySettings: DaySetting[] = [
   { id: 1, weekday: Weekday.Monday },
   { id: 2, weekday: Weekday.Tuesday },
   { id: 3, weekday: Weekday.Wednesday },

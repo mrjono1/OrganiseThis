@@ -1,8 +1,9 @@
-import { PersonSettings } from './PersonSettings';
-import { SpanSettings } from './SpanSettings';
+import { PersonSetting } from './PersonSetting';
+import { SpanSetting } from './SpanSetting';
 import { Availability } from './Availability';
-import { DaySettings } from './DaySettings';
+import { DaySetting } from './DaySetting';
 import { Settings } from './Settings';
-import { SkillSettings } from './SkillSettings';
+import { SkillSetting } from './SkillSetting';
+import { RoomSetting } from './RoomSetting';
 
-export { Availability, DaySettings, PersonSettings, SpanSettings, Settings, SkillSettings };
+export { Availability, DaySetting, PersonSetting, SpanSetting, Settings, SkillSetting, RoomSetting };

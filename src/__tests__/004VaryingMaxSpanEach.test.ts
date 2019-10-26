@@ -1,16 +1,16 @@
 import OrganiseThis from '../lib/OrganiseThis';
-import { Settings, DaySettings, PersonSettings } from '../settings';
+import { Settings, DaySetting, PersonSetting } from '../settings';
 import { Weekday } from '../types';
 
 // 'https://stackoverflow.com/a/37682352/3308772';
 
-const peopleSettings: PersonSettings[] = [
+const peopleSettings: PersonSetting[] = [
   { id: 1, name: 'Steve', availability: { maxNumberOfSpans: 1 } },
   { id: 2, name: 'Bob', availability: { maxNumberOfSpans: 2 } },
   { id: 3, name: 'Jen', availability: { maxNumberOfSpans: 5 } }
 ];
 
-const daySettings: DaySettings[] = [
+const daySettings: DaySetting[] = [
   { id: 1, weekday: Weekday.Monday },
   { id: 2, weekday: Weekday.Tuesday },
   { id: 3, weekday: Weekday.Wednesday },

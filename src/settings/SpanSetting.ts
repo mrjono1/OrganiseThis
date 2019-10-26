@@ -1,4 +1,4 @@
-export interface SpanSettings {
+export interface SpanSetting {
   id: number;
   date?: Date;
   name?: string;

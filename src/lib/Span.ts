@@ -1,30 +1,30 @@
-﻿import { Settings, PersonSettings, SpanSettings } from '../settings';
+﻿import { Settings, PersonSetting, SpanSetting } from '../settings';
 import { Person } from './Person';
 
 export class Span {
   private _id: number;
   private _settings: Settings;
-  private _spanSettings: SpanSettings;
+  private _spanSetting: SpanSetting;
 
-  private _personSettings?: PersonSettings;
+  private _personSetting?: PersonSetting;
 
   private _person?: Person;
 
   private _fitness?: number;
 
-  constructor(id: number, settings: Settings, spanSettings: SpanSettings, personSettings?: PersonSettings) {
+  constructor(id: number, settings: Settings, spanSetting: SpanSetting, personSetting?: PersonSetting) {
     this._id = id;
     this._settings = settings;
-    this._spanSettings = spanSettings;
-    this._personSettings = personSettings;
+    this._spanSetting = spanSetting;
+    this._personSetting = personSetting;
     this.newSpan();
   }
 
   private newSpan(): void {
     // todo in future span settings will influence this section
 
-    if (this._personSettings) {
-      this._person = new Person(0, this._settings, this._personSettings);
+    if (this._personSetting) {
+      this._person = new Person(0, this._settings, this._personSetting);
     }
   }
 
@@ -65,7 +65,7 @@ export class Span {
     if (this._person) {
       peopleToString.push(this._person.toString());
     }
-    return `    Span Id: ${this._id}, Setting Id: ${this._spanSettings.id}, ${this._spanSettings.name}
+    return `    Span Id: ${this._id}, Setting Id: ${this._spanSetting.id}, ${this._spanSetting.name}
     Span Fitness: ${this._fitness}
     People:
 ${peopleToString.join('\n')}`;

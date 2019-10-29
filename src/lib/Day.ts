@@ -2,13 +2,14 @@
 import { Settings, DaySetting, PersonSetting } from '../settings';
 import { randomIndexAndItem } from '../helpers/random';
 import { Weekday } from '../types';
+import { Room } from './Room';
 
 export class Day {
   private _id: number;
   private _settings: Settings;
   private _daySetting: DaySetting;
 
-  private _spans: Span[];
+  private _rooms: Room[];
 
   private _fitness?: number;
 
@@ -16,69 +17,73 @@ export class Day {
     this._id = id;
     this._settings = settings;
     this._daySetting = daySetting;
-    this._spans = [];
+    this._rooms = [];
     this.newDay();
   }
 
   newDay(): void {
-    // Default span if none defined
-    if (!this._daySetting.spanSettings) {
-      this._daySetting.spanSettings = [this._settings.defaultSpan];
-    }
-
     let spanId = 1;
+    let roomId = 1;
     const personIndexesUsed: number[] = [];
-    for (const spanSetting of this._daySetting.spanSettings) {
-      let personSettingItem: PersonSetting | undefined = undefined;
-      let personSettingIndex: number | undefined = undefined;
+    if (!this._daySetting.dayRoomSettings) {
+      return;
+    }
+    for (const dayRoomSetting of this._daySetting.dayRoomSettings) {
+      const room = new Room(roomId++, this._settings, dayRoomSetting);
+      for (const spanSetting of dayRoomSetting.spanSettings) {
+        let personSettingItem: PersonSetting | undefined = undefined;
+        let personSettingIndex: number | undefined = undefined;
 
-      const { fixedPersonIndex, fixedPersonItem } = this.fixedPerson(spanSetting.id);
-      personSettingItem = fixedPersonItem;
-      personSettingIndex = fixedPersonIndex;
+        const { fixedPersonIndex, fixedPersonItem } = this.fixedPerson(spanSetting.id);
+        personSettingItem = fixedPersonItem;
+        personSettingIndex = fixedPersonIndex;
 
-      if (personSettingItem === undefined && this._settings.oneSpanPerDay) {
-        // todo ensure unique list
-        const usedIndexes = this.getUnavailablePersonIndexes(spanSetting.id).concat(personIndexesUsed);
+        if (personSettingItem === undefined && this._settings.oneSpanPerDay) {
+          // todo ensure unique list
+          const usedIndexes = this.getUnavailablePersonIndexes(spanSetting.id).concat(personIndexesUsed);
 
-        // Filter out people who dont have the skill
-        if (
-          spanSetting.skillSettingIds &&
-          spanSetting.skillSettingIds.length !== 0 &&
-          this._settings.skillSettings &&
-          this._settings.skillSettings.length !== 0
-        ) {
-          for (let index = 0; index < this._settings.personSettings.length; index++) {
-            if (usedIndexes.includes(index)) {
-              continue;
-            }
-            let matched = false;
-            const personSetting = this._settings.personSettings[index];
-            if (personSetting.skillSettingIds && personSetting.skillSettingIds.length !== 0) {
-              let matchedSkillCount = 0;
-              for (const spanSkillId of spanSetting.skillSettingIds) {
-                if (personSetting.skillSettingIds.includes(spanSkillId)) {
-                  matchedSkillCount++;
-                }
+          // Filter out people who dont have the skill
+          if (
+            spanSetting.skillSettingIds &&
+            spanSetting.skillSettingIds.length !== 0 &&
+            this._settings.skillSettings &&
+            this._settings.skillSettings.length !== 0
+          ) {
+            for (let index = 0; index < this._settings.personSettings.length; index++) {
+              if (usedIndexes.includes(index)) {
+                continue;
               }
-              matched = matchedSkillCount === spanSetting.skillSettingIds.length;
-            }
-            if (!matched) {
-              usedIndexes.push(index);
+              let matched = false;
+              const personSetting = this._settings.personSettings[index];
+              if (personSetting.skillSettingIds && personSetting.skillSettingIds.length !== 0) {
+                let matchedSkillCount = 0;
+                for (const spanSkillId of spanSetting.skillSettingIds) {
+                  if (personSetting.skillSettingIds.includes(spanSkillId)) {
+                    matchedSkillCount++;
+                  }
+                }
+                matched = matchedSkillCount === spanSetting.skillSettingIds.length;
+              }
+              if (!matched) {
+                usedIndexes.push(index);
+              }
             }
           }
+
+          const { index, item } = randomIndexAndItem(this._settings.personSettings, usedIndexes);
+          personSettingItem = item;
+          personSettingIndex = index;
         }
 
-        const { index, item } = randomIndexAndItem(this._settings.personSettings, usedIndexes);
-        personSettingItem = item;
-        personSettingIndex = index;
+        const span = new Span(spanId++, this._settings, spanSetting, personSettingItem);
+        room.spans.push(span);
+
+        if (personSettingIndex !== undefined) {
+          personIndexesUsed.push(personSettingIndex);
+        }
       }
 
-      const span = new Span(spanId++, this._settings, spanSetting, personSettingItem);
-      this._spans.push(span);
-
-      if (personSettingIndex !== undefined) {
-        personIndexesUsed.push(personSettingIndex);
-      }
+      this.rooms.push(room);
     }
   }
 
@@ -122,11 +127,11 @@ export class Day {
   }
 
   evaluate(): void {
-    let dayFitness = 0;
-    for (const span of this._spans) {
-      dayFitness += span.fitness;
+    let fitness = 0;
+    for (const room of this.rooms) {
+      fitness += room.fitness;
     }
-    this._fitness = dayFitness / this._spans.length;
+    this._fitness = this.rooms.length === 0 ? 0 : fitness / this.rooms.length;
   }
 
   get fitness(): number {
@@ -137,23 +142,21 @@ export class Day {
     return this._fitness || 0;
   }
 
-  get spans(): Span[] {
-    return this._spans;
+  get rooms(): Room[] {
+    return this._rooms;
   }
 
   public toString(): string {
-    const spansToString: string[] = [];
+    const roomsToString: string[] = [];
 
-    if (this._spans) {
-      for (const span of this._spans) {
-        spansToString.push(span.toString());
-      }
+    for (const room of this.rooms) {
+      roomsToString.push(room.toString());
     }
 
     const name = this._daySetting.weekday ? Weekday[this._daySetting.weekday].toString() : '';
     return `Day Id: ${this._id}, Setting Id: ${this._daySetting.id}, ${name}
   Day Fitness: ${this._fitness}
-  Spans:
-${spansToString.join('\n')}`;
+  Rooms:
+${roomsToString.join('\n')}`;
   }
 }

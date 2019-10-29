@@ -1,6 +1,6 @@
 import { Weekday } from '../types';
 import { SpanSetting } from '.';
-import { DayRoomSetting } from './DayRoomSettings';
+import { DayRoomSetting } from './DayRoomSetting';
 
 export interface DaySetting {
   id: number;

@@ -1,6 +1,7 @@
 import { Calendar } from './Calendar';
 import { Settings } from '../settings';
 import { DefaultSettings } from '../defaults';
+import { transform } from './TransformSettings';
 
 export default class OrganiseThis {
   private _name: string;
@@ -43,6 +44,8 @@ ${this._bestCalendar.toString()}`;
   }
 
   run(): void {
+    this._settings = transform(this._settings);
+
     const calendars: Calendar[] = [];
 
     // Generate 100 calendars

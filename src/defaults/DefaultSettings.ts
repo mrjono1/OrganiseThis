@@ -7,5 +7,9 @@ export const DefaultSettings: Settings = {
   defaultSpan: {
     id: 0,
     name: 'All Day'
+  },
+  defaultRoom: {
+    id: 0,
+    name: 'Main Room'
   }
 };

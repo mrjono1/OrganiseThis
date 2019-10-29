@@ -40,9 +40,11 @@ export class Calendar {
       if (personSetting.availability && personSetting.availability.maxNumberOfSpans !== undefined) {
         let numberOfSpans = 0;
         for (const day of this._days) {
-          for (const span of day.spans) {
-            if (span.person && span.person.settings.id === personSetting.id) {
-              numberOfSpans++;
+          for (const room of day.rooms) {
+            for (const span of room.spans) {
+              if (span.person && span.person.settings.id === personSetting.id) {
+                numberOfSpans++;
+              }
             }
           }
         }

@@ -13,5 +13,6 @@ export interface Settings {
    */
   oneSpanPerDay: boolean;
   defaultSpan: SpanSetting;
+  defaultRoom: RoomSetting;
   roomSettings?: RoomSetting[];
 }

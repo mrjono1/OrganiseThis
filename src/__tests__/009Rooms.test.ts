@@ -34,36 +34,108 @@ const daySettings: DaySetting[] = [
       {
         id: 2,
         roomSettingId: ROOM_DINING_ROOM,
-        spanSettings: [{ id: 3, name: 'Open' }, { id: 4, name: 'Midday' }, { id: 5, name: 'Close' }]
+        spanSettings: [
+          { id: 4, name: 'Open', skillSettingIds: [SKILL_OPEN_KITCHEN] },
+          { id: 5, name: 'Midday' },
+          { id: 6, name: 'Close', skillSettingIds: [SKILL_CLOSE_KITCHEN] }
+        ]
       }
     ]
   },
   {
     id: 2,
     weekday: Weekday.Tuesday,
-    spanSettings: [{ id: 4, name: 'Open', skillSettingIds: [1] }, { id: 5, name: 'Midday' }, { id: 6, name: 'Close' }]
+    dayRoomSettings: [
+      {
+        id: 3,
+        roomSettingId: ROOM_KITCHEN,
+        spanSettings: [
+          { id: 7, name: 'Open', skillSettingIds: [SKILL_OPEN_KITCHEN] },
+          { id: 8, name: 'Midday' },
+          { id: 9, name: 'Close', skillSettingIds: [SKILL_CLOSE_KITCHEN] }
+        ]
+      },
+      {
+        id: 4,
+        roomSettingId: ROOM_DINING_ROOM,
+        spanSettings: [
+          { id: 10, name: 'Open' },
+          { id: 11, name: 'Midday' },
+          { id: 12, name: 'Close', skillSettingIds: [] }
+        ]
+      }
+    ]
   },
   {
     id: 3,
     weekday: Weekday.Wednesday,
-    spanSettings: [{ id: 7, name: 'Open', skillSettingIds: [1] }, { id: 8, name: 'Midday' }, { id: 9, name: 'Close' }]
+    dayRoomSettings: [
+      {
+        id: 5,
+        roomSettingId: ROOM_KITCHEN,
+        spanSettings: [
+          { id: 13, name: 'Open', skillSettingIds: [SKILL_OPEN_KITCHEN] },
+          { id: 14, name: 'Midday' },
+          { id: 15, name: 'Close', skillSettingIds: [SKILL_CLOSE_KITCHEN] }
+        ]
+      },
+      {
+        id: 6,
+        roomSettingId: ROOM_DINING_ROOM,
+        spanSettings: [
+          { id: 16, name: 'Open' },
+          { id: 17, name: 'Midday' },
+          { id: 18, name: 'Close', skillSettingIds: [] }
+        ]
+      }
+    ]
   },
   {
     id: 4,
     weekday: Weekday.Thursday,
-    spanSettings: [
-      { id: 10, name: 'Open', skillSettingIds: [1] },
-      { id: 11, name: 'Midday' },
-      { id: 12, name: 'Close' }
+    dayRoomSettings: [
+      {
+        id: 7,
+        roomSettingId: ROOM_KITCHEN,
+        spanSettings: [
+          { id: 19, name: 'Open', skillSettingIds: [SKILL_OPEN_KITCHEN] },
+          { id: 20, name: 'Midday' },
+          { id: 21, name: 'Close', skillSettingIds: [SKILL_CLOSE_KITCHEN] }
+        ]
+      },
+      {
+        id: 8,
+        roomSettingId: ROOM_DINING_ROOM,
+        spanSettings: [
+          { id: 22, name: 'Open' },
+          { id: 23, name: 'Midday' },
+          { id: 24, name: 'Close', skillSettingIds: [] }
+        ]
+      }
     ]
   },
   {
     id: 5,
     weekday: Weekday.Friday,
-    spanSettings: [
-      { id: 13, name: 'Open', skillSettingIds: [1] },
-      { id: 14, name: 'Midday' },
-      { id: 15, name: 'Close' }
+    dayRoomSettings: [
+      {
+        id: 9,
+        roomSettingId: ROOM_KITCHEN,
+        spanSettings: [
+          { id: 25, name: 'Open', skillSettingIds: [SKILL_OPEN_KITCHEN] },
+          { id: 26, name: 'Midday' },
+          { id: 27, name: 'Close', skillSettingIds: [SKILL_CLOSE_KITCHEN] }
+        ]
+      },
+      {
+        id: 10,
+        roomSettingId: ROOM_DINING_ROOM,
+        spanSettings: [
+          { id: 28, name: 'Open' },
+          { id: 29, name: 'Midday' },
+          { id: 30, name: 'Close', skillSettingIds: [] }
+        ]
+      }
     ]
   }
 ];

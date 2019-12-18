@@ -38,7 +38,7 @@ export class Day {
         personSettingItem = fixedPersonItem;
         personSettingIndex = fixedPersonIndex;
 
-        if (personSettingItem === undefined && this._settings.oneSpanPerDay) {
+        if (personSettingItem === undefined) {
           // todo ensure unique list
           const usedIndexes = this.getUnavailablePersonIndexes(spanSetting.id).concat(personIndexesUsed);
 

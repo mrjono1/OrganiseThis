@@ -12,7 +12,8 @@
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "eslint 'src/**'",
     "test": "yarn test-verbose --silent",
-    "test-verbose": "jest --config jest.config.js"
+    "test-verbose": "jest --config jest.config.js",
+    "pub": "tsc && cp package.json /dist && cp README.md /dist && cd /dist && npm publish"
   },
   "dependencies": {},
   "devDependencies": {

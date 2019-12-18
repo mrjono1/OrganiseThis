@@ -49,7 +49,7 @@ export class Calendar {
           }
         }
         if (numberOfSpans > personSetting.availability.maxNumberOfSpans) {
-          fitness--;
+          fitness += 0.1;
         }
       }
     }

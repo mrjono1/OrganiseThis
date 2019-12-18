@@ -13,8 +13,8 @@ const skillSettings: SkillSetting[] = [
 
 const [ROOM_KITCHEN, ROOM_DINING_ROOM] = [1, 2];
 const roomSettings: RoomSetting[] = [
-  { id: 1, name: 'Kitchen', skillSettingIds: [SKILL_KITCHEN] },
-  { id: 2, name: 'Dining room', skillSettingIds: [SKILL_DINING_ROOM] }
+  { id: ROOM_KITCHEN, name: 'Kitchen', skillSettingIds: [SKILL_KITCHEN] },
+  { id: ROOM_DINING_ROOM, name: 'Dining room', skillSettingIds: [SKILL_DINING_ROOM] }
 ];
 
 const daySettings: DaySetting[] = [
@@ -35,9 +35,9 @@ const daySettings: DaySetting[] = [
         id: 2,
         roomSettingId: ROOM_DINING_ROOM,
         spanSettings: [
-          { id: 4, name: 'Open', skillSettingIds: [SKILL_OPEN_KITCHEN] },
+          { id: 4, name: 'Open', skillSettingIds: [] },
           { id: 5, name: 'Midday' },
-          { id: 6, name: 'Close', skillSettingIds: [SKILL_CLOSE_KITCHEN] }
+          { id: 6, name: 'Close', skillSettingIds: [] }
         ]
       }
     ]
@@ -142,10 +142,11 @@ const daySettings: DaySetting[] = [
 
 const personSettings: PersonSetting[] = [
   { id: 1, name: 'Steve', skillSettingIds: [SKILL_KITCHEN, SKILL_OPEN_KITCHEN] },
-  { id: 2, name: 'Bob', unavailableShiftIds: [2, 5] },
-  { id: 3, name: 'Jen' },
-  { id: 4, name: 'Simon', availability: { maxNumberOfSpans: 1 } },
-  { id: 5, name: 'Greg' }
+  { id: 2, name: 'Bob', unavailableShiftIds: [2, 5], skillSettingIds: [SKILL_KITCHEN, SKILL_DINING_ROOM] },
+  { id: 3, name: 'Jen', skillSettingIds: [SKILL_KITCHEN] },
+  { id: 4, name: 'Simon', availability: { maxNumberOfSpans: 3 }, skillSettingIds: [SKILL_DINING_ROOM] },
+  { id: 5, name: 'Alfred', skillSettingIds: [SKILL_DINING_ROOM] },
+  { id: 6, name: 'Greg', skillSettingIds: [SKILL_KITCHEN, SKILL_CLOSE_KITCHEN] }
 ];
 
 const settings: Partial<Settings> = { skillSettings, daySettings, personSettings, roomSettings };

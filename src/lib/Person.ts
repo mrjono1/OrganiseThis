@@ -2,14 +2,15 @@
 
 export class Person {
   public readonly id: number;
-  private _settings: Settings;
-  private _personSetting: PersonSetting;
+  public readonly settings: Settings;
+  public readonly personSetting: PersonSetting;
+
   private _fitness?: number;
 
   constructor(id: number, settings: Settings, personSetting: PersonSetting) {
     this.id = id;
-    this._settings = settings;
-    this._personSetting = personSetting;
+    this.settings = settings;
+    this.personSetting = personSetting;
     this.newPerson();
   }
 
@@ -26,10 +27,6 @@ export class Person {
     return this._fitness || 0;
   }
 
-  get settings(): PersonSetting {
-    return this._personSetting;
-  }
-
   evaluate(): void {
     this._fitness = 1;
   }
@@ -40,7 +37,7 @@ export class Person {
   }
 
   public toString(): string {
-    return `      Person Id: ${this.id}, Setting Id: ${this._personSetting.id}, ${this._personSetting.name}
+    return `      Person Id: ${this.id}, Setting Id: ${this.personSetting.id}, ${this.personSetting.name}
       Person Fitness: ${this._fitness}`;
   }
 }

@@ -6,16 +6,15 @@ import { Room } from './Room';
 
 export class Day {
   public readonly id: number;
-
-  private _settings: Settings;
-
-  public _daySetting: DaySetting;
+  public readonly settings: Settings;
+  public readonly _daySetting: DaySetting;
   public readonly rooms: Room[];
+
   private _fitness?: number;
 
   constructor(id: number, settings: Settings, daySetting: DaySetting) {
     this.id = id;
-    this._settings = settings;
+    this.settings = settings;
     this._daySetting = daySetting;
     this.rooms = [];
     this.newDay();
@@ -29,7 +28,7 @@ export class Day {
     }
 
     for (const dayRoomSetting of this._daySetting.dayRoomSettings) {
-      const room = new Room(this._settings.idCounter++, this._settings, dayRoomSetting);
+      const room = new Room(this.settings.idCounter++, this.settings, dayRoomSetting);
       for (const spanSetting of dayRoomSetting.spanSettings) {
         let personSettingItem: PersonSetting | undefined = undefined;
         let personSettingIndex: number | undefined = undefined;
@@ -46,15 +45,15 @@ export class Day {
           if (
             spanSetting.skillSettingIds &&
             spanSetting.skillSettingIds.length !== 0 &&
-            this._settings.skillSettings &&
-            this._settings.skillSettings.length !== 0
+            this.settings.skillSettings &&
+            this.settings.skillSettings.length !== 0
           ) {
-            for (let index = 0; index < this._settings.personSettings.length; index++) {
+            for (let index = 0; index < this.settings.personSettings.length; index++) {
               if (usedIndexes.includes(index)) {
                 continue;
               }
               let matched = false;
-              const personSetting = this._settings.personSettings[index];
+              const personSetting = this.settings.personSettings[index];
               if (personSetting.skillSettingIds && personSetting.skillSettingIds.length !== 0) {
                 let matchedSkillCount = 0;
                 for (const spanSkillId of spanSetting.skillSettingIds) {
@@ -70,12 +69,12 @@ export class Day {
             }
           }
 
-          const { index, item } = randomIndexAndItem(this._settings.personSettings, usedIndexes);
+          const { index, item } = randomIndexAndItem(this.settings.personSettings, usedIndexes);
           personSettingItem = item;
           personSettingIndex = index;
         }
 
-        const span = new Span(this._settings.idCounter++, this._settings, spanSetting, personSettingItem);
+        const span = new Span(this.settings.idCounter++, this.settings, spanSetting, personSettingItem);
         room.spans.push(span);
 
         if (personSettingIndex !== undefined) {
@@ -88,8 +87,8 @@ export class Day {
   }
 
   private fixedPerson(spanSettingId: number): { fixedPersonIndex?: number; fixedPersonItem?: PersonSetting } {
-    for (let index = 0; index < this._settings.personSettings.length; index++) {
-      const personSetting = this._settings.personSettings[index];
+    for (let index = 0; index < this.settings.personSettings.length; index++) {
+      const personSetting = this.settings.personSettings[index];
       if (!personSetting.fixedShiftsIds) {
         continue;
       }
@@ -103,8 +102,8 @@ export class Day {
 
   private getUnavailablePersonIndexes(spanSettingId: number): number[] {
     const indexes: number[] = [];
-    for (let index = 0; index < this._settings.personSettings.length; index++) {
-      const personSetting = this._settings.personSettings[index];
+    for (let index = 0; index < this.settings.personSettings.length; index++) {
+      const personSetting = this.settings.personSettings[index];
       if (!personSetting.unavailableShiftIds || personSetting.unavailableShiftIds.length === 0) {
         continue;
       }

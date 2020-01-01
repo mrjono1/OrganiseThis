@@ -5,8 +5,8 @@ import { deepClone } from '../helpers/clone';
 import { Day } from './Day';
 
 const crossoverCalendars = (settings: Settings, calendarOne: Calendar, calendarTwo: Calendar): Calendar[] => {
-  const calendarOneDays = deepClone(calendarOne.days());
-  const calendarTwoDays = deepClone(calendarTwo.days());
+  const calendarOneDays = deepClone(calendarOne.days);
+  const calendarTwoDays = deepClone(calendarTwo.days);
 
   // Crossover Days
   const splitArray = randomSplitArray(settings.daySettings);

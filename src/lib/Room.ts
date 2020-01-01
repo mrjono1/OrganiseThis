@@ -3,15 +3,16 @@ import { Span } from './Span';
 
 export class Room {
   public readonly id: number;
-  private _settings: Settings;
-  private _dayRoomSetting: DayRoomSetting;
+  public readonly settings: Settings;
+  public readonly dayRoomSetting: DayRoomSetting;
   public readonly spans: Span[];
+
   private _fitness?: number;
 
   constructor(id: number, settings: Settings, dayRoomSetting: DayRoomSetting) {
     this.id = id;
-    this._settings = settings;
-    this._dayRoomSetting = dayRoomSetting;
+    this.settings = settings;
+    this.dayRoomSetting = dayRoomSetting;
     this.spans = [];
     this.newRoom();
   }
@@ -49,7 +50,7 @@ export class Room {
       toString.push(span.toString());
     }
 
-    return `Room Id: ${this.id}, Setting Id: ${this._dayRoomSetting.id}, ${name}
+    return `Room Id: ${this.id}, Setting Id: ${this.dayRoomSetting.id}, ${name}
   Room Fitness: ${this._fitness}
   Spans:
 ${toString.join('\n')}`;

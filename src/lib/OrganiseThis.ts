@@ -6,21 +6,18 @@ import { deepClone } from '../helpers/clone';
 import { crossover } from './Crossover';
 
 export default class OrganiseThis {
-  private _name: string;
+  public readonly name: string;
   public readonly settings: Settings;
+
   private _bestCalendar?: Calendar;
   private _iterations?: number;
 
   constructor(name: string, settings: Partial<Settings>) {
-    this._name = name;
+    this.name = name;
     this.settings = transform({
       ...DefaultSettings,
       ...settings
     });
-  }
-
-  public get name(): string {
-    return this._name;
   }
 
   public get bestCalendar(): Calendar | undefined {
@@ -36,7 +33,7 @@ export default class OrganiseThis {
       return 'No Canidate Calenders found';
     }
 
-    return `OrganiseThis Name:${this._name}
+    return `OrganiseThis Name:${this.name}
 ${this._bestCalendar.toString()}`;
   }
 

@@ -3,49 +3,44 @@ import { Settings } from '../settings';
 
 export class Calendar {
   public readonly id: number;
+  public readonly days: Day[];
+  public readonly settings: Settings;
 
-  private _settings: Settings;
-
-  private _days: Day[];
   private _fitness?: number;
 
   constructor(id: number, settings: Settings, days: Day[] = []) {
     this.id = id;
-    this._settings = settings;
-    this._days = days;
+    this.settings = settings;
+    this.days = days;
 
     this.newCalendar();
-  }
-
-  public days(): Day[] {
-    return this._days;
   }
 
   private newCalendar(): void {
     if (this.days.length !== 0) {
       return;
     }
-    for (const daySetting of this._settings.daySettings) {
-      const day = new Day(this._settings.idCounter++, this._settings, daySetting);
-      this._days.push(day);
+    for (const daySetting of this.settings.daySettings) {
+      const day = new Day(this.settings.idCounter++, this.settings, daySetting);
+      this.days.push(day);
     }
   }
 
   evaluate(): void {
     let dayFitness = 0;
-    for (const day of this._days) {
+    for (const day of this.days) {
       dayFitness += day.fitness;
     }
-    let fitness = dayFitness / this._days.length;
+    let fitness = dayFitness / this.days.length;
 
     // Person settings
-    for (const personSetting of this._settings.personSettings) {
+    for (const personSetting of this.settings.personSettings) {
       if (personSetting.availability && personSetting.availability.maxNumberOfSpans !== undefined) {
         let numberOfSpans = 0;
-        for (const day of this._days) {
+        for (const day of this.days) {
           for (const room of day.rooms) {
             for (const span of room.spans) {
-              if (span.person && span.person.settings.id === personSetting.id) {
+              if (span.person && span.person.personSetting.id === personSetting.id) {
                 numberOfSpans++;
               }
             }
@@ -70,8 +65,8 @@ export class Calendar {
 
   public toString(): string {
     const daysToString: string[] = [];
-    if (this._days) {
-      for (const day of this._days) {
+    if (this.days) {
+      for (const day of this.days) {
         daysToString.push(day.toString());
       }
     }

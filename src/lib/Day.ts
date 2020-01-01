@@ -5,25 +5,23 @@ import { Weekday } from '../types';
 import { Room } from './Room';
 
 export class Day {
-  private _id: number;
+  public readonly id: number;
 
   private _settings: Settings;
 
-  private _daySetting: DaySetting;
-  private _rooms: Room[];
+  public _daySetting: DaySetting;
+  public readonly rooms: Room[];
   private _fitness?: number;
 
   constructor(id: number, settings: Settings, daySetting: DaySetting) {
-    this._id = id;
+    this.id = id;
     this._settings = settings;
     this._daySetting = daySetting;
-    this._rooms = [];
+    this.rooms = [];
     this.newDay();
   }
 
   newDay(): void {
-    let spanId = 1;
-    let roomId = 1;
     const personIndexesUsed: number[] = [];
 
     if (!this._daySetting.dayRoomSettings) {
@@ -31,7 +29,7 @@ export class Day {
     }
 
     for (const dayRoomSetting of this._daySetting.dayRoomSettings) {
-      const room = new Room(roomId++, this._settings, dayRoomSetting);
+      const room = new Room(this._settings.idCounter++, this._settings, dayRoomSetting);
       for (const spanSetting of dayRoomSetting.spanSettings) {
         let personSettingItem: PersonSetting | undefined = undefined;
         let personSettingIndex: number | undefined = undefined;
@@ -77,7 +75,7 @@ export class Day {
           personSettingIndex = index;
         }
 
-        const span = new Span(spanId++, this._settings, spanSetting, personSettingItem);
+        const span = new Span(this._settings.idCounter++, this._settings, spanSetting, personSettingItem);
         room.spans.push(span);
 
         if (personSettingIndex !== undefined) {
@@ -119,10 +117,6 @@ export class Day {
     return indexes;
   }
 
-  get id(): number {
-    return this._id;
-  }
-
   public copy(): Day {
     const copy = JSON.parse(JSON.stringify(this)) as Day;
     return copy;
@@ -146,10 +140,6 @@ export class Day {
     return this._fitness || 0;
   }
 
-  get rooms(): Room[] {
-    return this._rooms;
-  }
-
   public toString(): string {
     const roomsToString: string[] = [];
 
@@ -158,7 +148,7 @@ export class Day {
     }
 
     const name = this._daySetting.weekday ? Weekday[this._daySetting.weekday].toString() : '';
-    return `Day Id: ${this._id}, Setting Id: ${this._daySetting.id}, ${name}
+    return `Day Id: ${this.id}, Setting Id: ${this._daySetting.id}, ${name}
   Day Fitness: ${this._fitness}
   Rooms:
 ${roomsToString.join('\n')}`;

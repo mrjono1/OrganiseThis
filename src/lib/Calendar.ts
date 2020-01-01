@@ -2,31 +2,33 @@
 import { Settings } from '../settings';
 
 export class Calendar {
-  private _id: number;
+  public readonly id: number;
 
   private _settings: Settings;
 
   private _days: Day[];
-  private _dayIdCounter = 0;
   private _fitness?: number;
 
-  constructor(id: number, settings: Settings) {
-    this._id = id;
+  constructor(id: number, settings: Settings, days: Day[] = []) {
+    this.id = id;
     this._settings = settings;
-    this._days = [];
+    this._days = days;
 
     this.newCalendar();
   }
 
-  private newCalendar(): void {
-    for (const daySetting of this._settings.daySettings) {
-      const day = new Day(this._dayIdCounter++, this._settings, daySetting);
-      this._days.push(day);
-    }
+  public days(): Day[] {
+    return this._days;
   }
 
-  get id(): number {
-    return this._id;
+  private newCalendar(): void {
+    if (this.days.length !== 0) {
+      return;
+    }
+    for (const daySetting of this._settings.daySettings) {
+      const day = new Day(this._settings.idCounter++, this._settings, daySetting);
+      this._days.push(day);
+    }
   }
 
   evaluate(): void {
@@ -73,7 +75,7 @@ export class Calendar {
         daysToString.push(day.toString());
       }
     }
-    return `Calendar Id: ${this._id}
+    return `Calendar Id: ${this.id}
 Calendar Fitness: ${this._fitness}${this._fitness === 1 ? ' (Best Possible Result)' : ''}
 Days:
 ${daysToString.join('\n')}`;

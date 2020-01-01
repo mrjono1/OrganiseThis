@@ -17,10 +17,10 @@ const basic = new OrganiseThis('Settings', settings);
 test('Settings', () => {
   expect(basic.name).toBe('Settings');
 
-  expect(basic.setting.personSettings[0].name).toBe('Steve');
-  expect(basic.setting.personSettings[1].name).toBe('Bob');
+  expect(basic.settings.personSettings[0].name).toBe('Steve');
+  expect(basic.settings.personSettings[1].name).toBe('Bob');
 
-  expect(basic.setting.daySettings[0].weekday).toBe(Weekday.Monday);
-  expect(basic.setting.daySettings[1].weekday).toBe(Weekday.Tuesday);
-  expect(basic.setting.daySettings[2].weekday).toBe(Weekday.Wednesday);
+  expect(basic.settings.daySettings[0].weekday).toBe(Weekday.Monday);
+  expect(basic.settings.daySettings[1].weekday).toBe(Weekday.Tuesday);
+  expect(basic.settings.daySettings[2].weekday).toBe(Weekday.Wednesday);
 });

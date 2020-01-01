@@ -2,26 +2,22 @@
 import { Span } from './Span';
 
 export class Room {
-  private _id: number;
+  public readonly id: number;
   private _settings: Settings;
   private _dayRoomSetting: DayRoomSetting;
-  private _spans: Span[];
+  public readonly spans: Span[];
   private _fitness?: number;
 
   constructor(id: number, settings: Settings, dayRoomSetting: DayRoomSetting) {
-    this._id = id;
+    this.id = id;
     this._settings = settings;
     this._dayRoomSetting = dayRoomSetting;
-    this._spans = [];
+    this.spans = [];
     this.newRoom();
   }
 
   private newRoom(): void {
     // todo in future span settings will influence this section
-  }
-
-  get id(): number {
-    return this._id;
   }
 
   get fitness(): number {
@@ -31,10 +27,6 @@ export class Room {
     }
 
     return this._fitness || 0;
-  }
-
-  get spans(): Span[] {
-    return this._spans;
   }
 
   evaluate(): void {
@@ -57,7 +49,7 @@ export class Room {
       toString.push(span.toString());
     }
 
-    return `Room Id: ${this._id}, Setting Id: ${this._dayRoomSetting.id}, ${name}
+    return `Room Id: ${this.id}, Setting Id: ${this._dayRoomSetting.id}, ${name}
   Room Fitness: ${this._fitness}
   Spans:
 ${toString.join('\n')}`;

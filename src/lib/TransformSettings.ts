@@ -27,5 +27,10 @@ export const transform = (userSettings: Settings): Settings => {
       delete daySetting.spanSettings;
     }
   }
+
+  if (settings.selection.bestCalendarsToKeep > settings.numberOfCalendars) {
+    throw '"settings.selection.bestCalendarsToKeep" cannot be greater than "settings.numberOfCalendars"';
+  }
+
   return settings;
 };

@@ -11,5 +11,10 @@ export const DefaultSettings: Settings = {
   defaultRoom: {
     id: 0,
     name: 'Main Room'
-  }
+  },
+  numberOfCalendars: 100,
+  selection: {
+    bestCalendarsToKeep: 10
+  },
+  idCounter: 1
 };

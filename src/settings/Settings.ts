@@ -1,5 +1,6 @@
 import { PersonSetting, DaySetting, SpanSetting, SkillSetting } from '.';
 import { RoomSetting } from './RoomSetting';
+import { SelectionSettings } from './SelectionSettings';
 
 export interface Settings {
   personSettings: PersonSetting[];
@@ -15,4 +16,17 @@ export interface Settings {
   defaultSpan: SpanSetting;
   defaultRoom: RoomSetting;
   roomSettings?: RoomSetting[];
+
+  /**
+   * This is the Population size it defaults to 100
+   */
+  numberOfCalendars: number;
+
+  selection: SelectionSettings;
+
+  // I would perfer to use UUID but I want to ensure this project is as fast as possible so using integers
+  /**
+   * Integer counter for ids
+   */
+  idCounter: number;
 }

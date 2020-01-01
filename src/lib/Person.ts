@@ -1,13 +1,13 @@
 ﻿import { Settings, PersonSetting } from '../settings';
 
 export class Person {
-  private _id: number;
+  public readonly id: number;
   private _settings: Settings;
   private _personSetting: PersonSetting;
   private _fitness?: number;
 
   constructor(id: number, settings: Settings, personSetting: PersonSetting) {
-    this._id = id;
+    this.id = id;
     this._settings = settings;
     this._personSetting = personSetting;
     this.newPerson();
@@ -15,10 +15,6 @@ export class Person {
 
   private newPerson(): void {
     // todo in future person settings will influence this section
-  }
-
-  get id(): number {
-    return this._id;
   }
 
   get fitness(): number {
@@ -44,7 +40,7 @@ export class Person {
   }
 
   public toString(): string {
-    return `      Person Id: ${this._id}, Setting Id: ${this._personSetting.id}, ${this._personSetting.name}
+    return `      Person Id: ${this.id}, Setting Id: ${this._personSetting.id}, ${this._personSetting.name}
       Person Fitness: ${this._fitness}`;
   }
 }

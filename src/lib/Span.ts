@@ -2,7 +2,7 @@
 import { Person } from './Person';
 
 export class Span {
-  private _id: number;
+  public readonly id: number;
   private _settings: Settings;
   private _spanSetting: SpanSetting;
   private _personSetting?: PersonSetting;
@@ -10,7 +10,7 @@ export class Span {
   private _fitness?: number;
 
   constructor(id: number, settings: Settings, spanSetting: SpanSetting, personSetting?: PersonSetting) {
-    this._id = id;
+    this.id = id;
     this._settings = settings;
     this._spanSetting = spanSetting;
     this._personSetting = personSetting;
@@ -21,12 +21,8 @@ export class Span {
     // todo in future span settings will influence this section
 
     if (this._personSetting) {
-      this._person = new Person(0, this._settings, this._personSetting);
+      this._person = new Person(this._settings.idCounter++, this._settings, this._personSetting);
     }
-  }
-
-  get id(): number {
-    return this._id;
   }
 
   get fitness(): number {
@@ -62,7 +58,7 @@ export class Span {
     if (this._person) {
       peopleToString.push(this._person.toString());
     }
-    return `    Span Id: ${this._id}, Setting Id: ${this._spanSetting.id}, ${this._spanSetting.name}
+    return `    Span Id: ${this.id}, Setting Id: ${this._spanSetting.id}, ${this._spanSetting.name}
     Span Fitness: ${this._fitness}
     People:
 ${peopleToString.join('\n')}`;

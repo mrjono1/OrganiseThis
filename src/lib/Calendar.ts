@@ -3,11 +3,11 @@ import { Settings } from '../settings';
 
 export class Calendar {
   private _id: number;
+
   private _settings: Settings;
+
   private _days: Day[];
-
   private _dayIdCounter = 0;
-
   private _fitness?: number;
 
   constructor(id: number, settings: Settings) {
@@ -28,6 +28,7 @@ export class Calendar {
   get id(): number {
     return this._id;
   }
+
   evaluate(): void {
     let dayFitness = 0;
     for (const day of this._days) {

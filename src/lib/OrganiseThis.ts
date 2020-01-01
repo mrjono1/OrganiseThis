@@ -6,7 +6,6 @@ import { transform } from './TransformSettings';
 export default class OrganiseThis {
   private _name: string;
   private _settings: Settings;
-
   private _bestCalendar?: Calendar;
   private _iterations?: number;
 

@@ -3,9 +3,7 @@
 export class Person {
   private _id: number;
   private _settings: Settings;
-
   private _personSetting: PersonSetting;
-
   private _fitness?: number;
 
   constructor(id: number, settings: Settings, personSetting: PersonSetting) {
@@ -22,6 +20,7 @@ export class Person {
   get id(): number {
     return this._id;
   }
+
   get fitness(): number {
     // todo in future person settings will influence this section
     if (this._fitness === undefined) {
@@ -38,6 +37,7 @@ export class Person {
   evaluate(): void {
     this._fitness = 1;
   }
+
   public copy(): Person {
     const copy = JSON.parse(JSON.stringify(this)) as Person;
     return copy;

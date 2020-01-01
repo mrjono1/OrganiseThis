@@ -14,5 +14,5 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module' // Allows for the use of imports
   },
-  rules: {}
+  rules: { 'lines-between-class-members': ['error', 'always', { exceptAfterSingleLine: true }] }
 };

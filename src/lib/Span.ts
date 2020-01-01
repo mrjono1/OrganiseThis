@@ -5,11 +5,8 @@ export class Span {
   private _id: number;
   private _settings: Settings;
   private _spanSetting: SpanSetting;
-
   private _personSetting?: PersonSetting;
-
   private _person?: Person;
-
   private _fitness?: number;
 
   constructor(id: number, settings: Settings, spanSetting: SpanSetting, personSetting?: PersonSetting) {

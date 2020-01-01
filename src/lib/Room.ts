@@ -4,11 +4,8 @@ import { Span } from './Span';
 export class Room {
   private _id: number;
   private _settings: Settings;
-
   private _dayRoomSetting: DayRoomSetting;
-
   private _spans: Span[];
-
   private _fitness?: number;
 
   constructor(id: number, settings: Settings, dayRoomSetting: DayRoomSetting) {

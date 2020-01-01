@@ -6,11 +6,11 @@ import { Room } from './Room';
 
 export class Day {
   private _id: number;
+
   private _settings: Settings;
+
   private _daySetting: DaySetting;
-
   private _rooms: Room[];
-
   private _fitness?: number;
 
   constructor(id: number, settings: Settings, daySetting: DaySetting) {
@@ -25,9 +25,11 @@ export class Day {
     let spanId = 1;
     let roomId = 1;
     const personIndexesUsed: number[] = [];
+
     if (!this._daySetting.dayRoomSettings) {
       return;
     }
+
     for (const dayRoomSetting of this._daySetting.dayRoomSettings) {
       const room = new Room(roomId++, this._settings, dayRoomSetting);
       for (const spanSetting of dayRoomSetting.spanSettings) {
@@ -128,9 +130,11 @@ export class Day {
 
   evaluate(): void {
     let fitness = 0;
+
     for (const room of this.rooms) {
       fitness += room.fitness;
     }
+
     this._fitness = this.rooms.length === 0 ? 0 : fitness / this.rooms.length;
   }
 

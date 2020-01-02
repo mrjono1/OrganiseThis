@@ -1,6 +1,6 @@
 import { Settings } from '../settings';
 import { Calendar } from './Calendar';
-import { randomIndexAndItem, randomSplitArray } from '../helpers/random';
+import { randomIndexAndItem, randomIndex, randomTrueFalse } from '../helpers/random';
 import { deepClone } from '../helpers/clone';
 import { Day } from './Day';
 
@@ -8,20 +8,51 @@ const crossoverCalendars = (settings: Settings, calendarOne: Calendar, calendarT
   const calendarOneDays = deepClone(calendarOne.days);
   const calendarTwoDays = deepClone(calendarTwo.days);
 
+  // Get Random Crossover start point
+  let startIndex = randomIndex(settings.daySettings, { cannotBeLastIndex: true });
+
+  // Get Random Crossover end point
+  let endIndex = randomIndex(settings.daySettings, { startIndex }) + 1;
+
+  // if nothing is to be swapped then randomly chop from the start or end
+  if (startIndex === 0 && endIndex === settings.daySettings.length) {
+    if (randomTrueFalse()) {
+      startIndex++;
+    } else {
+      endIndex--;
+    }
+  }
+
   // Crossover Days
-  const splitArray = randomSplitArray(settings.daySettings);
+  const splitArray = settings.daySettings.slice(startIndex, endIndex);
   // get just the Day ids from the first section
-  const sectionDayIds = splitArray.array1.map(item => item.id);
+  const sectionDayIds = splitArray.map(item => item.id);
 
-  // get the specific Setting Day Id, Days from the second calendar, then add the rest from the first day
-  const oneDays: Day[] = calendarTwoDays
-    .filter(day => sectionDayIds.includes(day._daySetting.id))
-    .concat(calendarOneDays.filter(day => !sectionDayIds.includes(day._daySetting.id)));
+  const oneDays: Day[] = [];
+  const twoDays: Day[] = [];
 
-  // get the specific Setting Day Id, Days from the first calendar, then add the rest from the second day
-  const twoDays: Day[] = calendarOneDays
-    .filter(day => sectionDayIds.includes(day._daySetting.id))
-    .concat(calendarTwoDays.filter(day => !sectionDayIds.includes(day._daySetting.id)));
+  // build up the new day lists
+  for (const daySetting of settings.daySettings) {
+    if (sectionDayIds.includes(daySetting.id)) {
+      const twoDay = calendarTwoDays.find(day => day.daySetting.id === daySetting.id);
+      if (twoDay) {
+        oneDays.push(twoDay);
+      }
+      const oneDay = calendarOneDays.find(day => day.daySetting.id === daySetting.id);
+      if (oneDay) {
+        twoDays.push(oneDay);
+      }
+    } else {
+      const oneDay = calendarOneDays.find(day => day.daySetting.id === daySetting.id);
+      if (oneDay) {
+        oneDays.push(oneDay);
+      }
+      const twoDay = calendarTwoDays.find(day => day.daySetting.id === daySetting.id);
+      if (twoDay) {
+        twoDays.push(twoDay);
+      }
+    }
+  }
 
   return [new Calendar(settings.idCounter++, settings, oneDays), new Calendar(settings.idCounter++, settings, twoDays)];
 };

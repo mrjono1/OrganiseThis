@@ -30,5 +30,8 @@ export const deepClone = <T>(obj: T): T => {
     return copy as T;
   }
 
+  // This is a just in case, as I dont know how the new type bigint will work
+  // istanbul is code coverage
+  /* istanbul ignore next */
   throw new Error("Unable to copy obj! Its type isn't supported.");
 };

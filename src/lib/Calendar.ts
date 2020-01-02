@@ -12,11 +12,16 @@ export class Calendar {
     this.id = id;
     this.settings = settings;
     this.days = days;
-
-    this.newCalendar();
+    if (!this.days) {
+      this.days = [];
+    }
+    this.generateDaysFromSettings();
   }
 
-  private newCalendar(): void {
+  /**
+   * Generate Days from day settings if days were not initalised or empty
+   */
+  private generateDaysFromSettings(): void {
     if (this.days.length !== 0) {
       return;
     }

@@ -2,7 +2,10 @@ import OrganiseThis from '../lib/OrganiseThis';
 import { DaySetting, PersonSetting, Settings } from '../settings';
 import { Weekday } from '../types';
 
-const peopleSettings: PersonSetting[] = [{ id: 1, name: 'Steve' }, { id: 2, name: 'Bob' }];
+const peopleSettings: PersonSetting[] = [
+  { id: 1, name: 'Steve' },
+  { id: 2, name: 'Bob' }
+];
 
 const daySettings: DaySetting[] = [
   { id: 1, weekday: Weekday.Monday },
@@ -10,11 +13,9 @@ const daySettings: DaySetting[] = [
   { id: 3, weekday: Weekday.Wednesday }
 ];
 
-const settings: Partial<Settings> = { daySettings, personSettings: peopleSettings };
-
-const basic = new OrganiseThis('Settings', settings);
-
 test('Settings', () => {
+  const settings: Partial<Settings> = { daySettings, personSettings: peopleSettings };
+  const basic = new OrganiseThis('Settings', settings);
   expect(basic.name).toBe('Settings');
 
   expect(basic.settings.personSettings[0].name).toBe('Steve');
@@ -23,4 +24,12 @@ test('Settings', () => {
   expect(basic.settings.daySettings[0].weekday).toBe(Weekday.Monday);
   expect(basic.settings.daySettings[1].weekday).toBe(Weekday.Tuesday);
   expect(basic.settings.daySettings[2].weekday).toBe(Weekday.Wednesday);
+
+  const invalidSettings: Partial<Settings> = {
+    daySettings,
+    personSettings: peopleSettings,
+    selection: { bestCalendarsToKeep: 200 }
+  };
+
+  expect(() => new OrganiseThis('Settings', invalidSettings)).toThrowError();
 });

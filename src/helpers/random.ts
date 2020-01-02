@@ -1,10 +1,48 @@
-export const randomItem = <T>(array: Array<T>): T => {
-  const index = Math.floor(Math.random() * array.length);
-  return array[index];
+/**
+ * Get a random array index
+ *
+ * @param array The array to get random index
+ * @param options Designed to use `cannotBeLastIndex` or `startIndex` seperatly they *may* work togeather
+ */
+export const randomIndex = <T>(
+  array: Array<T>,
+  options?: {
+    cannotBeLastIndex?: boolean;
+    startIndex?: number;
+  }
+): number => {
+  if (!array || array.length === 0) {
+    throw 'Cannot get random index of empty array';
+  }
+
+  let length = array.length;
+
+  if (options) {
+    if (options.startIndex !== undefined) {
+      length = length - (options.startIndex + 1);
+    }
+    if (options.cannotBeLastIndex === true) {
+      length--;
+    }
+  }
+
+  if (length <= 0) {
+    throw '"options" values are invalid';
+  }
+  const index = Math.floor(Math.random() * length);
+
+  if (options && options.startIndex !== undefined) {
+    return index + options.startIndex + 1;
+  }
+  return index;
 };
-export const randomItemNullable = <T>(array: Array<T>): T | undefined => {
-  const index = Math.floor(Math.random() * array.length + 1);
-  return array[index];
+
+export const randomItem = <T>(array: Array<T>): T => {
+  return array[randomIndex(array)];
+};
+
+export const randomTrueFalse = (): boolean => {
+  return Math.floor(Math.random() * 2) === 1;
 };
 
 export const randomIndexAndItem = <T>(array: Array<T>, indexesUsed: number[]): { index: number; item: T } => {
@@ -37,7 +75,7 @@ export const randomSplitArray = <T>(array: Array<T>): { array1: Array<T>; array2
   const index = randomArraySplitStartIndex(array);
 
   return {
-    array1: array.splice(0, index - 1),
-    array2: array.splice(index)
+    array1: array.slice(0, index),
+    array2: array.slice(index)
   };
 };

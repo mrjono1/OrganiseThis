@@ -7,7 +7,7 @@ import { Room } from './Room';
 export class Day {
   public readonly id: number;
   public readonly settings: Settings;
-  public readonly _daySetting: DaySetting;
+  public readonly daySetting: DaySetting;
   public readonly rooms: Room[];
 
   private _fitness?: number;
@@ -15,7 +15,7 @@ export class Day {
   constructor(id: number, settings: Settings, daySetting: DaySetting) {
     this.id = id;
     this.settings = settings;
-    this._daySetting = daySetting;
+    this.daySetting = daySetting;
     this.rooms = [];
     this.newDay();
   }
@@ -23,11 +23,11 @@ export class Day {
   newDay(): void {
     const personIndexesUsed: number[] = [];
 
-    if (!this._daySetting.dayRoomSettings) {
+    if (!this.daySetting.dayRoomSettings) {
       return;
     }
 
-    for (const dayRoomSetting of this._daySetting.dayRoomSettings) {
+    for (const dayRoomSetting of this.daySetting.dayRoomSettings) {
       const room = new Room(this.settings.idCounter++, this.settings, dayRoomSetting);
       for (const spanSetting of dayRoomSetting.spanSettings) {
         let personSettingItem: PersonSetting | undefined = undefined;
@@ -146,8 +146,8 @@ export class Day {
       roomsToString.push(room.toString());
     }
 
-    const name = this._daySetting.weekday ? Weekday[this._daySetting.weekday].toString() : '';
-    return `Day Id: ${this.id}, Setting Id: ${this._daySetting.id}, ${name}
+    const name = this.daySetting.weekday ? Weekday[this.daySetting.weekday].toString() : '';
+    return `Day Id: ${this.id}, Setting Id: ${this.daySetting.id}, ${name}
   Day Fitness: ${this._fitness}
   Rooms:
 ${roomsToString.join('\n')}`;

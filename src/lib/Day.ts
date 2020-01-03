@@ -116,11 +116,6 @@ export class Day {
     return indexes;
   }
 
-  public copy(): Day {
-    const copy = JSON.parse(JSON.stringify(this)) as Day;
-    return copy;
-  }
-
   evaluate(): void {
     let fitness = 0;
 
@@ -136,7 +131,7 @@ export class Day {
       this.evaluate();
     }
 
-    return this._fitness || 0;
+    return this._fitness ?? 0;
   }
 
   public toString(): string {

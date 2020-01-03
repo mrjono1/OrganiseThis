@@ -27,7 +27,7 @@ export class Room {
       this.evaluate();
     }
 
-    return this._fitness || 0;
+    return this._fitness ?? 0;
   }
 
   evaluate(): void {
@@ -36,11 +36,6 @@ export class Room {
       fitness += span.fitness;
     }
     this._fitness = this.spans.length === 0 ? 0 : fitness / this.spans.length;
-  }
-
-  public copy(): Span {
-    const copy = JSON.parse(JSON.stringify(this)) as Span;
-    return copy;
   }
 
   public toString(): string {

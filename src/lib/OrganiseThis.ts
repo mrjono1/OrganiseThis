@@ -25,7 +25,7 @@ export default class OrganiseThis {
   }
 
   public get iterations(): number {
-    return this._iterations || 0;
+    return this._iterations ?? 0;
   }
 
   public toString(): string {

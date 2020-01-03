@@ -21,7 +21,7 @@ export const transform = (userSettings: Settings): Settings => {
           id: 0,
           roomSettingId: 1,
           // Default span if none defined
-          spanSettings: daySetting.spanSettings || [{ ...settings.defaultSpan }]
+          spanSettings: daySetting.spanSettings ?? [{ ...settings.defaultSpan }]
         }
       ];
       delete daySetting.spanSettings;

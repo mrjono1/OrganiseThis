@@ -24,16 +24,11 @@ export class Person {
       this.evaluate();
     }
 
-    return this._fitness || 0;
+    return this._fitness ?? 0;
   }
 
   evaluate(): void {
     this._fitness = 1;
-  }
-
-  public copy(): Person {
-    const copy = JSON.parse(JSON.stringify(this)) as Person;
-    return copy;
   }
 
   public toString(): string {

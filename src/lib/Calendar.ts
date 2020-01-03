@@ -31,7 +31,7 @@ export class Calendar {
     }
   }
 
-  evaluate(): void {
+  public evaluate(): void {
     let dayFitness = 0;
     for (const day of this.days) {
       dayFitness += day.fitness;
@@ -61,11 +61,7 @@ export class Calendar {
   }
 
   get fitness(): number {
-    if (this._fitness === undefined) {
-      this.evaluate();
-    }
-
-    return this._fitness || 0;
+    return this._fitness ?? NaN;
   }
 
   public toString(): string {

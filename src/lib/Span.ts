@@ -32,7 +32,7 @@ export class Span {
       this.evaluate();
     }
 
-    return this._fitness || 0;
+    return this._fitness ?? 0;
   }
 
   get person(): Person | undefined {
@@ -47,11 +47,6 @@ export class Span {
     }
 
     this._fitness = this._person.fitness;
-  }
-
-  public copy(): Span {
-    const copy = JSON.parse(JSON.stringify(this)) as Span;
-    return copy;
   }
 
   public toString(): string {

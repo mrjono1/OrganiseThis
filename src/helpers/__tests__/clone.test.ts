@@ -8,6 +8,10 @@ export class TestObject {
     this.id = id;
     this.name = name;
   }
+
+  aMethod(): void {
+    console.log(this.name);
+  }
 }
 test('deepClone', () => {
   const complexObject = {
@@ -59,4 +63,7 @@ test('deepClone', () => {
   expect(cloned.skill.id).toBe(1);
   complexObject.skill.id = 44;
   expect(cloned.skill.id).toBe(1);
+
+  // ensure custom object methods are copied
+  expect(() => cloned.skill.aMethod()).not.toThrow();
 });

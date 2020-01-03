@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export const deepClone = <T>(obj: T): T => {
   // Handle the 3 simple types, and null or undefined
-  if (obj === null || obj === undefined || 'object' !== typeof obj) return obj;
+  if (obj === null || obj === undefined || 'object' !== typeof obj) {
+    return obj;
+  }
 
   // Handle Date
   if (obj instanceof Date) {
@@ -21,7 +23,7 @@ export const deepClone = <T>(obj: T): T => {
 
   // Handle Object
   if (obj instanceof Object) {
-    const copy = {};
+    const copy: T = Object.create(obj as Record<string, any>);
     for (const attr in obj) {
       if ((obj as any).hasOwnProperty(attr)) {
         (copy as any)[attr] = deepClone(obj[attr]);

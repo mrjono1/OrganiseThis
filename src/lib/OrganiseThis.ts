@@ -38,30 +38,37 @@ ${this._bestCalendar.toString()}`;
   }
 
   run(): void {
-    const calendars: Calendar[] = this.generateInitalPopulation();
+    let calendars: Calendar[] = this.generateInitalPopulation();
 
-    // check if any have 100% fitness
-    this._iterations = 0;
-    for (const calendar of calendars) {
-      this._iterations++;
-      if (calendar.fitness === 1) {
-        this._bestCalendar = calendar;
-        return;
+    for (let generationIndex = 0; generationIndex < this.settings.numberOfGenerations; generationIndex++) {
+      if (generationIndex !== 0) {
+        calendars = this.generateNextGeneration(calendars);
       }
+
+      // check if any have 100% fitness
+      this._iterations = 0;
+      for (const calendar of calendars) {
+        if (typeof calendar.evaluate !== 'function') {
+          calendar.evaluate();
+        }
+        calendar.evaluate();
+        this._iterations++;
+        if (calendar.fitness === 1) {
+          this._bestCalendar = calendar;
+          break;
+        }
+      }
+
+      if (this._bestCalendar) {
+        break;
+      }
+      calendars = calendars.sort((a: Calendar, b: Calendar) => {
+        return b.fitness - a.fitness;
+      });
     }
 
-    const sortedCalendars = calendars.sort((a: Calendar, b: Calendar) => {
-      return b.fitness - a.fitness;
-    });
-
-    this._bestCalendar = sortedCalendars[0];
-
-    const nextGeneration = this.generateNextGeneration(sortedCalendars);
-    for (const calendar of nextGeneration) {
-      if (calendar.fitness === 1) {
-        this._bestCalendar = calendar;
-        return;
-      }
+    if (!this._bestCalendar) {
+      this._bestCalendar = calendars[0];
     }
   }
 
@@ -84,7 +91,7 @@ ${this._bestCalendar.toString()}`;
       calendarToKeepIndex < this.settings.selection.bestCalendarsToKeep;
       calendarToKeepIndex++
     ) {
-      nextGeneration.push(deepClone(currentCalendars[calendarToKeepIndex]));
+      nextGeneration.push(deepClone<Calendar>(currentCalendars[calendarToKeepIndex]));
     }
 
     const crossoverOffSpring = crossover(this.settings, currentCalendars);

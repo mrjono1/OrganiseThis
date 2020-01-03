@@ -12,6 +12,7 @@ export const DefaultSettings: Settings = {
     id: 0,
     name: 'Main Room'
   },
+  numberOfGenerations: 10,
   numberOfCalendars: 100,
   selection: {
     bestCalendarsToKeep: 10

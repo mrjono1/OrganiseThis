@@ -18,6 +18,13 @@ export interface Settings {
   roomSettings?: RoomSetting[];
 
   /**
+   * How many times do we try to make modifications to the calendars to attemt to get the best possible calendar
+   * The `lower` number the faster but lower possibility of the best solution
+   * The `higher` number the slower but the higher possibility of the best solution
+   */
+  numberOfGenerations: number;
+
+  /**
    * This is the Population size it defaults to 100
    */
   numberOfCalendars: number;

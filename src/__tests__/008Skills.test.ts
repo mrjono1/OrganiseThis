@@ -2,7 +2,10 @@ import OrganiseThis from '../lib/OrganiseThis';
 import { Settings, DaySetting, PersonSetting, SkillSetting } from '../settings';
 import { Weekday } from '../types';
 
-const skillSettings: SkillSetting[] = [{ id: 1, name: 'Open' }, { id: 2, name: 'Close' }];
+const skillSettings: SkillSetting[] = [
+  { id: 1, name: 'Open' },
+  { id: 2, name: 'Close' }
+];
 
 const daySettings: DaySetting[] = [
   {

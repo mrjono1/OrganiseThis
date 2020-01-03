@@ -21,4 +21,7 @@ yarn
 
 ## Jest to run tests https://jestjs.io/
 yarn test
+
+## Istanbul to check test code coverage https://istanbul.js.org/
+yarn coverage
 ```

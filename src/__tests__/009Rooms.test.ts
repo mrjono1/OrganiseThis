@@ -164,5 +164,6 @@ test('009Rooms', () => {
 
   console.log(`Iterations: ${organiseThis.iterations}`);
   console.log(organiseThis.bestCalendar.toString());
-  expect(organiseThis.bestCalendar.fitness).toBe(1);
+  const fitness = organiseThis.bestCalendar.fitness;
+  expect(fitness).toBe(1);
 });

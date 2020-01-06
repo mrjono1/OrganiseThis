@@ -1,4 +1,4 @@
-﻿import { Settings, PersonSetting } from '../settings';
+﻿import { Settings, PersonSetting } from 'settings';
 
 export class Person {
   public readonly id: number;

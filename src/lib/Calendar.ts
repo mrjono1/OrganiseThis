@@ -1,5 +1,5 @@
-﻿import { Day } from './Day';
-import { Settings } from '../settings';
+﻿import { Settings } from 'settings';
+import { Day } from 'lib';
 
 export class Calendar {
   public readonly id: number;

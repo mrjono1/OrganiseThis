@@ -1,6 +1,6 @@
-import { Settings } from '../settings';
+import { Settings } from 'settings';
 
-export const transform = (userSettings: Settings): Settings => {
+export const transformSettings = (userSettings: Settings): Settings => {
   const settings = JSON.parse(JSON.stringify(userSettings)) as Settings;
 
   // add default room if user didnt add one

@@ -1,5 +1,5 @@
-﻿import { Settings, DayRoomSetting } from '../settings';
-import { Span } from './Span';
+﻿import { Settings, DayRoomSetting } from 'settings';
+import { Span } from 'lib';
 
 export class Room {
   public readonly id: number;

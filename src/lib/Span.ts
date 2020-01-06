@@ -1,5 +1,5 @@
-﻿import { Settings, PersonSetting, SpanSetting } from '../settings';
-import { Person } from './Person';
+﻿import { Settings, PersonSetting, SpanSetting } from 'settings';
+import { Person } from 'lib';
 
 export class Span {
   public readonly id: number;

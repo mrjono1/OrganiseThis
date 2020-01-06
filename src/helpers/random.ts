@@ -45,7 +45,7 @@ export const randomTrueFalse = (): boolean => {
   return Math.floor(Math.random() * 2) === 1;
 };
 
-export const randomIndexAndItem = <T>(array: Array<T>, indexesUsed: number[]): { index: number; item: T } => {
+export const randomIndexAndItem = <T>(array: Array<T>, indexesUsed: number[] = []): { index: number; item: T } => {
   const indexArray: number[] = [];
 
   array.forEach((_value: T, index: number) => {

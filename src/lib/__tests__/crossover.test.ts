@@ -1,9 +1,7 @@
 import { DaySetting, PersonSetting, Availability } from '../../settings';
 import { Weekday } from '../../types';
-import { crossover } from '../Crossover';
-import { Calendar } from '../Calendar';
+import { crossover, Calendar, transformSettings } from '..';
 import { DefaultSettings } from '../../defaults';
-import { transform } from '../TransformSettings';
 
 const availability: Availability = { maxNumberOfSpans: 1 };
 
@@ -23,7 +21,7 @@ const daySettings: DaySetting[] = [
   { id: 5, weekday: Weekday.Friday }
 ];
 
-const settings = transform({
+const settings = transformSettings({
   ...DefaultSettings,
   ...{ daySettings, personSettings: peopleSettings }
 });
@@ -31,7 +29,7 @@ const settings = transform({
 const calendars: Calendar[] = [new Calendar(1, settings), new Calendar(2, settings)];
 
 test('Crossover', () => {
-  const result = crossover(settings, calendars);
+  const result: Calendar[] = crossover(settings, calendars);
 
   // as there is only 2 calendars then these values should be swapped
   const calendaryOneDayIds = calendars[0].days.map(day => day.id);

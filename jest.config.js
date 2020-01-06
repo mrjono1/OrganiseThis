@@ -3,5 +3,6 @@ module.exports = {
     '^.+\\.ts$': 'ts-jest'
   },
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.ts$',
-  moduleFileExtensions: ['ts', 'js']
+  moduleFileExtensions: ['ts', 'js'],
+  modulePaths: ['<rootDir>', '<rootDir>/src']
 };

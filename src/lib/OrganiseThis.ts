@@ -1,9 +1,7 @@
-import { Calendar } from './Calendar';
-import { Settings } from '../settings';
-import { DefaultSettings } from '../defaults';
-import { transform } from './TransformSettings';
-import { deepClone } from '../helpers/clone';
-import { crossover } from './Crossover';
+import { Settings } from 'settings';
+import { DefaultSettings } from 'defaults';
+import { deepClone } from 'helpers';
+import { mutate, Calendar, transformSettings, crossover } from 'lib';
 
 export default class OrganiseThis {
   public readonly name: string;
@@ -14,7 +12,7 @@ export default class OrganiseThis {
 
   constructor(name: string, settings: Partial<Settings>) {
     this.name = name;
-    this.settings = transform({
+    this.settings = transformSettings({
       ...DefaultSettings,
       ...settings
     });
@@ -86,6 +84,7 @@ ${this._bestCalendar.toString()}`;
   generateNextGeneration(currentCalendars: Calendar[]): Calendar[] {
     const nextGeneration: Calendar[] = [];
 
+    // KEEP BEST CALENDARS
     for (
       let calendarToKeepIndex = 0;
       calendarToKeepIndex < this.settings.selection.bestCalendarsToKeep;
@@ -94,9 +93,16 @@ ${this._bestCalendar.toString()}`;
       nextGeneration.push(deepClone<Calendar>(currentCalendars[calendarToKeepIndex]));
     }
 
+    // CROSSOVER
     const crossoverOffSpring = crossover(this.settings, currentCalendars);
     crossoverOffSpring.forEach(calendar => nextGeneration.push(calendar));
 
+    // MUTATE
+    const mutatedOffspring = mutate(this.settings, currentCalendars);
+    mutatedOffspring.forEach(calendar => nextGeneration.push(calendar));
+
+    // PAD OUT GENERATION
+    // TODO: Make this random
     // add in some existing calendars to pad out the next generation
     for (const calendar of currentCalendars.splice(this.settings.selection.bestCalendarsToKeep)) {
       if (nextGeneration.length === this.settings.numberOfCalendars) {
@@ -105,6 +111,7 @@ ${this._bestCalendar.toString()}`;
       nextGeneration.push(calendar);
     }
 
+    // CHECK GENERATION
     // These errors should never happen but it it does I have useful error messages
     if (nextGeneration.length < this.settings.numberOfCalendars) {
       throw `generateNextGeneration has failed there is not enough calendars (${nextGeneration.length}/${this.settings.numberOfCalendars})`;

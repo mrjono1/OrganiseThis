@@ -1,8 +1,6 @@
-import { Settings } from '../settings';
-import { Calendar } from './Calendar';
-import { randomIndexAndItem, randomIndex, randomTrueFalse } from '../helpers/random';
-import { deepClone } from '../helpers/clone';
-import { Day } from './Day';
+import { Settings } from 'settings';
+import { Calendar, Day } from 'lib';
+import { deepClone, randomIndexAndItem, randomIndex, randomTrueFalse } from 'helpers';
 
 const crossoverCalendars = (settings: Settings, calendarOne: Calendar, calendarTwo: Calendar): Calendar[] => {
   const calendarOneDays = deepClone(calendarOne.days);

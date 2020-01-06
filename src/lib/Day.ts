@@ -1,8 +1,7 @@
-﻿import { Span } from './Span';
-import { Settings, DaySetting, PersonSetting } from '../settings';
-import { randomIndexAndItem } from '../helpers/random';
-import { Weekday } from '../types';
-import { Room } from './Room';
+﻿import { Span, Room } from 'lib';
+import { Settings, DaySetting, PersonSetting } from 'settings';
+import { randomIndexAndItem } from 'helpers';
+import { Weekday } from 'types';
 
 export class Day {
   public readonly id: number;

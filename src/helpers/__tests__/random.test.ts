@@ -4,7 +4,8 @@ import {
   randomItem,
   randomSplitArray,
   randomTrueFalse,
-  randomNumber
+  randomNumber,
+  randomItems
 } from '../random';
 
 test('randomNumber', () => {
@@ -89,4 +90,17 @@ test('randomSplitArray', () => {
   expect(index2.array1[0]).toBe('a');
   // item 'b' can be in either array1 or array2
   expect(index2.array2[index2.array2.length - 1]).toBe('c');
+});
+
+test('randomItems', () => {
+  const array1 = ['a', 'b'];
+  const items1 = randomItems(array1);
+  expect([1, 2]).toContain(items1.length);
+
+  const array2 = ['a'];
+  const item2 = randomItems(array2);
+
+  expect(item2).toStrictEqual(['a']);
+
+  expect(randomItems([])).toStrictEqual([]);
 });

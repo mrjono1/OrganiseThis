@@ -51,6 +51,10 @@ export const randomTrueFalse = (): boolean => {
 };
 
 export const randomIndexAndItem = <T>(array: Array<T>, indexesUsed: number[] = []): { index: number; item: T } => {
+  if (array.length === 0) {
+    throw 'No items in `array`';
+  }
+
   const indexArray: number[] = [];
 
   array.forEach((_value: T, index: number) => {
@@ -59,7 +63,11 @@ export const randomIndexAndItem = <T>(array: Array<T>, indexesUsed: number[] = [
     }
   });
 
-  const indexItem = randomNumber(0, indexArray.length);
+  if (indexArray.length === 0) {
+    throw 'No items in `array` after filtering with `indexesUsed`';
+  }
+
+  const indexItem = randomNumber(0, indexArray.length - 1);
   const index = indexArray[indexItem];
 
   return { index, item: array[index] };
@@ -69,7 +77,7 @@ export const randomArraySplitStartIndex = <T>(array: Array<T>): number => {
   if (array.length === 2) {
     return 1;
   }
-  return randomNumber(0, array.length - 1);
+  return randomNumber(1, array.length - 1);
 };
 
 /**
@@ -83,4 +91,25 @@ export const randomSplitArray = <T>(array: Array<T>): { array1: Array<T>; array2
     array1: array.slice(0, index),
     array2: array.slice(index)
   };
+};
+
+/**
+ * Get a random subset of items (at least 2)
+ * @param array Array of items
+ */
+export const randomItems = <T>(array: Array<T>): Array<T> => {
+  if (array.length === 0) {
+    return [];
+  }
+  const numberOfItems = randomNumber(1, array.length);
+
+  const randomItems: T[] = [];
+  const randomIndexes: number[] = [];
+  for (let index = 0; index < numberOfItems; index++) {
+    const { item, index } = randomIndexAndItem(array, randomIndexes);
+    randomItems.push(item);
+    randomIndexes.push(index);
+  }
+
+  return randomItems;
 };

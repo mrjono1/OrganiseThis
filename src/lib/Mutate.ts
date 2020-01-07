@@ -10,7 +10,7 @@ const mutateCalendar = (calendar: Calendar): Calendar => {
 };
 
 export const mutate = (settings: Settings, calendars: Calendar[]): Calendar[] => {
-  const items = randomItems(calendars);
+  const items = randomItems(calendars, settings.mutation.maxNumberItemsToMutate);
 
   const result: Calendar[] = [];
   for (const item of items) {

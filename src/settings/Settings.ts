@@ -1,4 +1,4 @@
-import { PersonSetting, DaySetting, SpanSetting, SkillSetting } from '.';
+import { PersonSetting, DaySetting, SpanSetting, SkillSetting, MutationSettings } from '.';
 import { RoomSetting } from './RoomSetting';
 import { SelectionSettings } from './SelectionSettings';
 
@@ -30,6 +30,7 @@ export interface Settings {
   numberOfCalendars: number;
 
   selection: SelectionSettings;
+  mutation: MutationSettings;
 
   // I would perfer to use UUID but I want to ensure this project is as fast as possible so using integers
   /**

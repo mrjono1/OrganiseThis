@@ -68,9 +68,11 @@ export class Day {
             }
           }
 
-          const { index, item } = randomIndexAndItem(this.settings.personSettings, usedIndexes);
-          personSettingItem = item;
-          personSettingIndex = index;
+          if (this.settings.personSettings.length !== usedIndexes.length) {
+            const { index, item } = randomIndexAndItem(this.settings.personSettings, usedIndexes);
+            personSettingItem = item;
+            personSettingIndex = index;
+          }
         }
 
         const span = new Span(this.settings.idCounter++, this.settings, spanSetting, personSettingItem);

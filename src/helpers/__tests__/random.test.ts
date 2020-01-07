@@ -1,4 +1,25 @@
-import { randomIndex, randomArraySplitStartIndex, randomItem, randomSplitArray, randomTrueFalse } from '../random';
+import {
+  randomIndex,
+  randomArraySplitStartIndex,
+  randomItem,
+  randomSplitArray,
+  randomTrueFalse,
+  randomNumber
+} from '../random';
+
+test('randomNumber', () => {
+  const index1 = randomNumber(2, 5);
+  expect([2, 3, 4, 5]).toContain(index1);
+
+  const index2 = randomNumber(0, 5);
+  expect([0, 1, 2, 3, 4, 5]).toContain(index2);
+
+  const index3 = randomNumber(5, 5);
+  expect([5]).toContain(index3);
+
+  const index4 = randomNumber(0, 0);
+  expect([0]).toContain(index4);
+});
 
 test('randomIndex', () => {
   const array1 = ['a'];
@@ -39,7 +60,6 @@ test('randomItem', () => {
 
 test('randomTrueFalse', () => {
   const value = randomTrueFalse();
-  console.log(value);
   expect(value).toBeDefined();
 });
 
@@ -51,7 +71,7 @@ test('randomArraySplitStartIndex', () => {
   const array2 = ['a', 'b', 'c'];
   const index2 = randomArraySplitStartIndex(array2);
 
-  expect(index2).not.toBe(0);
+  expect([0, 1, 2]).toContain(index2);
   expect(index2).not.toBe(3);
 });
 

@@ -1,3 +1,7 @@
+export const randomNumber = (minValue: number, maxValue: number): number => {
+  return Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue;
+};
+
 /**
  * Get a random array index
  *
@@ -29,7 +33,7 @@ export const randomIndex = <T>(
   if (length <= 0) {
     throw '"options" values are invalid';
   }
-  const index = Math.floor(Math.random() * length);
+  const index = randomNumber(0, length - 1);
 
   if (options && options.startIndex !== undefined) {
     return index + options.startIndex + 1;
@@ -42,7 +46,8 @@ export const randomItem = <T>(array: Array<T>): T => {
 };
 
 export const randomTrueFalse = (): boolean => {
-  return Math.floor(Math.random() * 2) === 1;
+  const val = randomNumber(0, 1);
+  return val === 1;
 };
 
 export const randomIndexAndItem = <T>(array: Array<T>, indexesUsed: number[] = []): { index: number; item: T } => {
@@ -54,7 +59,7 @@ export const randomIndexAndItem = <T>(array: Array<T>, indexesUsed: number[] = [
     }
   });
 
-  const indexItem = Math.floor(Math.random() * indexArray.length);
+  const indexItem = randomNumber(0, indexArray.length);
   const index = indexArray[indexItem];
 
   return { index, item: array[index] };
@@ -64,7 +69,7 @@ export const randomArraySplitStartIndex = <T>(array: Array<T>): number => {
   if (array.length === 2) {
     return 1;
   }
-  return Math.floor(Math.random() * (array.length - 1)) + 1;
+  return randomNumber(0, array.length - 1);
 };
 
 /**

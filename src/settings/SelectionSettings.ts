@@ -3,7 +3,7 @@
  */
 export interface SelectionSettings {
   /**
-   * Defaults to 10
+   * Defaults to 20
    */
-  bestCalendarsToKeep: number;
+  numberOfCalendars: number;
 }

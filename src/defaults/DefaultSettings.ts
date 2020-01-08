@@ -15,10 +15,10 @@ export const DefaultSettings: Settings = {
   numberOfGenerations: 10,
   numberOfCalendars: 100,
   selection: {
-    bestCalendarsToKeep: 20
+    numberOfCalendars: 20
   },
   mutation: {
-    maxNumberItemsToMutate: 20
+    numberOfCalendars: 20
   },
   idCounter: 1
 };

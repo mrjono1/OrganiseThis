@@ -28,8 +28,8 @@ export const transformSettings = (userSettings: Settings): Settings => {
     }
   }
 
-  if (settings.selection.bestCalendarsToKeep > settings.numberOfCalendars) {
-    throw '"settings.selection.bestCalendarsToKeep" cannot be greater than "settings.numberOfCalendars"';
+  if (settings.selection.numberOfCalendars > settings.numberOfCalendars) {
+    throw '"settings.selection.numberOfCalendars" cannot be greater than "settings.numberOfCalendars"';
   }
 
   return settings;

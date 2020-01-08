@@ -96,13 +96,17 @@ export const randomSplitArray = <T>(array: Array<T>): { array1: Array<T>; array2
 /**
  * Get a random subset of items (at least 2)
  * @param array Array of items
- * @param maxItems If not supplied it uses `array.length`
+ * @param options.numberOfItems If not supplied `options.numberOfItems` is attempted
+ * @param options.maxItems If not supplied it uses `array.length`
  */
-export const randomItems = <T>(array: Array<T>, maxItems?: number): Array<T> => {
+export const randomItems = <T>(array: Array<T>, options?: { maxItems?: number; numberOfItems?: number }): Array<T> => {
   if (array.length === 0) {
     return [];
   }
-  const numberOfItems = randomNumber(1, maxItems ?? array.length);
+  let numberOfItems = options?.numberOfItems;
+  if (numberOfItems === undefined) {
+    numberOfItems = randomNumber(1, options?.maxItems ?? array.length);
+  }
 
   const randomItems: T[] = [];
   const randomIndexes: number[] = [];

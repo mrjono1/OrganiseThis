@@ -97,6 +97,13 @@ test('randomItems', () => {
   const items1 = randomItems(array1);
   expect([1, 2]).toContain(items1.length);
 
+  const items1a = randomItems(array1, { numberOfItems: 2 });
+  expect(items1a).toContain('a');
+  expect(items1a).toContain('b');
+
+  const items1b = randomItems(array1, { numberOfItems: 1 });
+  expect(items1b.length).toEqual(1);
+
   const array2 = ['a'];
   const item2 = randomItems(array2);
 

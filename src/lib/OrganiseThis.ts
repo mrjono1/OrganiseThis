@@ -87,7 +87,7 @@ ${this._bestCalendar.toString()}`;
     // KEEP BEST CALENDARS
     for (
       let calendarToKeepIndex = 0;
-      calendarToKeepIndex < this.settings.selection.bestCalendarsToKeep;
+      calendarToKeepIndex < this.settings.selection.numberOfCalendars;
       calendarToKeepIndex++
     ) {
       nextGeneration.push(deepClone<Calendar>(currentCalendars[calendarToKeepIndex]));
@@ -104,7 +104,7 @@ ${this._bestCalendar.toString()}`;
     // PAD OUT GENERATION
     // TODO: Make this random
     // add in some existing calendars to pad out the next generation
-    for (const calendar of currentCalendars.splice(this.settings.selection.bestCalendarsToKeep)) {
+    for (const calendar of currentCalendars.splice(this.settings.selection.numberOfCalendars)) {
       if (nextGeneration.length === this.settings.numberOfCalendars) {
         break;
       }

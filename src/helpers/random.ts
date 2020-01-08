@@ -42,6 +42,9 @@ export const randomIndex = <T>(
 };
 
 export const randomItem = <T>(array: Array<T>): T => {
+  if (array.length === 1) {
+    return array[0];
+  }
   return array[randomIndex(array)];
 };
 
@@ -98,8 +101,12 @@ export const randomSplitArray = <T>(array: Array<T>): { array1: Array<T>; array2
  * @param array Array of items
  * @param options.numberOfItems If not supplied `options.numberOfItems` is attempted
  * @param options.maxItems If not supplied it uses `array.length`
+ * @param options.indexesUsed Array items to exclude
  */
-export const randomItems = <T>(array: Array<T>, options?: { maxItems?: number; numberOfItems?: number }): Array<T> => {
+export const randomItems = <T>(
+  array: Array<T>,
+  options?: { maxItems?: number; numberOfItems?: number; indexesUsed?: number[] }
+): Array<T> => {
   if (array.length === 0) {
     return [];
   }
@@ -109,7 +116,7 @@ export const randomItems = <T>(array: Array<T>, options?: { maxItems?: number; n
   }
 
   const randomItems: T[] = [];
-  const randomIndexes: number[] = [];
+  const randomIndexes: number[] = options?.indexesUsed ?? [];
   for (let index = 0; index < numberOfItems; index++) {
     const { item, index } = randomIndexAndItem(array, randomIndexes);
     randomItems.push(item);

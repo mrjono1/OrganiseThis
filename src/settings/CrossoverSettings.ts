@@ -1,13 +1,13 @@
 /**
- * Mutation Settings
+ * Crossover Settings
  */
-export interface MutationSettings {
+export interface CrossoverSettings {
   /**
    * Defaults to 20
    */
   numberOfCalendars: number;
   /**
-   * Defaults to `false` as not implemented
+   * Defaults to `true`
    */
   enabled: boolean;
 }

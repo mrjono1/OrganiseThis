@@ -3,8 +3,17 @@ import { Calendar } from 'index';
 import { Settings } from 'settings';
 import { randomItems } from 'helpers/random';
 
+// Find one person assigned or where one could be and replace it
 const mutateCalendar = (calendar: Calendar): Calendar => {
   const mutatedCalendar = deepClone<Calendar>(calendar);
+
+  // const day = randomItem(calendar.days);
+
+  // const room = randomItem(day.rooms);
+
+  // const span = randomItem(room.spans);
+
+  // const person = span.person;
 
   return mutatedCalendar;
 };

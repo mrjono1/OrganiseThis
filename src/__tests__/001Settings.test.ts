@@ -28,7 +28,7 @@ test('Settings', () => {
   const invalidSettings: Partial<Settings> = {
     daySettings,
     personSettings: peopleSettings,
-    selection: { numberOfCalendars: 200 }
+    selection: { numberOfCalendars: 200, enabled: true }
   };
 
   expect(() => new OrganiseThis('Settings', invalidSettings)).toThrowError();

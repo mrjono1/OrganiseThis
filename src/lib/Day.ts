@@ -121,6 +121,7 @@ export class Day {
     let fitness = 0;
 
     for (const room of this.rooms) {
+      room.evaluate();
       fitness += room.fitness;
     }
 
@@ -128,11 +129,7 @@ export class Day {
   }
 
   get fitness(): number {
-    if (this._fitness === undefined) {
-      this.evaluate();
-    }
-
-    return this._fitness ?? 0;
+    return this._fitness ?? NaN;
   }
 
   public toString(): string {

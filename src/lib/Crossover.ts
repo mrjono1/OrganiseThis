@@ -56,7 +56,25 @@ const crossoverCalendars = (settings: Settings, calendarOne: Calendar, calendarT
 };
 
 export const crossover = (settings: Settings, calendars: Calendar[]): Calendar[] => {
-  const calendarOne = randomIndexAndItem(calendars, []);
-  const calendarTwo = randomIndexAndItem(calendars, [calendarOne.index]);
-  return crossoverCalendars(settings, calendarOne.item, calendarTwo.item);
+  const resultItems: Calendar[] = [];
+  const indexesUsed: number[] = [];
+
+  // ensure we only corssover the amount of items that exist
+  const crossovers =
+    settings.crossover.numberOfCalendars < calendars.length ? settings.crossover.numberOfCalendars : calendars.length;
+
+  for (let index = 0; index < crossovers; index++) {
+    const calendarOne = randomIndexAndItem(calendars, indexesUsed);
+    indexesUsed.push(calendarOne.index);
+
+    // dont crossover with the current item
+    const calendarTwo = randomIndexAndItem(calendars, [calendarOne.index]);
+    const crossoverItems = crossoverCalendars(settings, calendarOne.item, calendarTwo.item);
+
+    // add crossover items
+    resultItems.push(crossoverItems[0]);
+    resultItems.push(crossoverItems[1]);
+  }
+
+  return resultItems;
 };

@@ -1,6 +1,6 @@
 import { Settings } from 'settings';
 import { DefaultSettings } from 'defaults';
-import { deepClone } from 'helpers';
+import { randomItems } from 'helpers';
 import { mutate, Calendar, transformSettings, crossover } from 'lib';
 
 export default class OrganiseThis {
@@ -83,33 +83,40 @@ ${this._bestCalendar.toString()}`;
 
   generateNextGeneration(currentCalendars: Calendar[]): Calendar[] {
     const nextGeneration: Calendar[] = [];
+    const calendarIndexesUsed: number[] = [];
 
-    // KEEP BEST CALENDARS
-    for (
-      let calendarToKeepIndex = 0;
-      calendarToKeepIndex < this.settings.selection.numberOfCalendars;
-      calendarToKeepIndex++
-    ) {
-      nextGeneration.push(deepClone<Calendar>(currentCalendars[calendarToKeepIndex]));
+    // SELECTION
+    if (this.settings.selection.enabled) {
+      for (
+        let calendarToKeepIndex = 0;
+        calendarToKeepIndex < this.settings.selection.numberOfCalendars;
+        calendarToKeepIndex++
+      ) {
+        nextGeneration.push(currentCalendars[calendarToKeepIndex]);
+        calendarIndexesUsed.push(calendarToKeepIndex);
+      }
     }
 
     // CROSSOVER
-    const crossoverOffSpring = crossover(this.settings, currentCalendars);
-    crossoverOffSpring.forEach(calendar => nextGeneration.push(calendar));
+    if (this.settings.crossover.enabled) {
+      const crossoverOffSpring = crossover(this.settings, currentCalendars);
+      crossoverOffSpring.forEach(calendar => nextGeneration.push(calendar));
+    }
 
     // MUTATE
-    const mutatedOffspring = mutate(this.settings, currentCalendars);
-    mutatedOffspring.forEach(calendar => nextGeneration.push(calendar));
+    if (this.settings.mutation.enabled) {
+      const mutatedOffspring = mutate(this.settings, currentCalendars);
+      mutatedOffspring.forEach(calendar => nextGeneration.push(calendar));
+    }
 
     // PAD OUT GENERATION
-    // TODO: Make this random
     // add in some existing calendars to pad out the next generation
-    for (const calendar of currentCalendars.splice(this.settings.selection.numberOfCalendars)) {
-      if (nextGeneration.length === this.settings.numberOfCalendars) {
-        break;
-      }
-      nextGeneration.push(calendar);
-    }
+    const numberOfItemsNeeded = this.settings.numberOfCalendars - nextGeneration.length;
+    const paddingItems = randomItems(currentCalendars, {
+      numberOfItems: numberOfItemsNeeded,
+      indexesUsed: calendarIndexesUsed
+    });
+    paddingItems.forEach(calendar => nextGeneration.push(calendar));
 
     // CHECK GENERATION
     // These errors should never happen but it it does I have useful error messages

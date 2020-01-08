@@ -34,6 +34,7 @@ export class Calendar {
   public evaluate(): void {
     let dayFitness = 0;
     for (const day of this.days) {
+      day.evaluate();
       dayFitness += day.fitness;
     }
     let fitness = dayFitness / this.days.length;

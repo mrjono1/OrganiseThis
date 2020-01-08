@@ -22,17 +22,13 @@ export class Room {
   }
 
   get fitness(): number {
-    // todo in future span settings will influence this section
-    if (this._fitness === undefined) {
-      this.evaluate();
-    }
-
-    return this._fitness ?? 0;
+    return this._fitness ?? NaN;
   }
 
   evaluate(): void {
     let fitness = 0;
     for (const span of this.spans) {
+      span.evaluate();
       fitness += span.fitness;
     }
     this._fitness = this.spans.length === 0 ? 0 : fitness / this.spans.length;

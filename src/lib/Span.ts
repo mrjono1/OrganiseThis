@@ -27,12 +27,7 @@ export class Span {
   }
 
   get fitness(): number {
-    // todo in future span settings will influence this section
-    if (this._fitness === undefined) {
-      this.evaluate();
-    }
-
-    return this._fitness ?? 0;
+    return this._fitness ?? NaN;
   }
 
   get person(): Person | undefined {
@@ -45,6 +40,8 @@ export class Span {
       this._fitness = 1;
       return;
     }
+
+    this._person.evaluate();
 
     this._fitness = this._person.fitness;
   }

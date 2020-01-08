@@ -15,10 +15,16 @@ export const DefaultSettings: Settings = {
   numberOfGenerations: 10,
   numberOfCalendars: 100,
   selection: {
-    numberOfCalendars: 20
+    numberOfCalendars: 20,
+    enabled: true
+  },
+  crossover: {
+    numberOfCalendars: 20,
+    enabled: true
   },
   mutation: {
-    numberOfCalendars: 20
+    numberOfCalendars: 20,
+    enabled: false
   },
   idCounter: 1
 };

@@ -5,7 +5,8 @@ import {
   randomSplitArray,
   randomTrueFalse,
   randomNumber,
-  randomItems
+  randomItems,
+  randomiseArray
 } from '../random';
 
 test('randomNumber', () => {
@@ -106,6 +107,28 @@ test('randomItems', () => {
 
   const array2 = ['a'];
   const item2 = randomItems(array2);
+
+  expect(item2).toStrictEqual(['a']);
+
+  expect(randomItems([])).toStrictEqual([]);
+});
+
+test('randomiseArray', () => {
+  const array1 = ['a', 'b'];
+
+  const items1 = randomiseArray(array1);
+  expect([1, 2]).toContain(items1.length);
+
+  expect(items1).toContain('a');
+  expect(items1).toContain('b');
+
+  expect(items1.length).toEqual(2);
+
+  // Ensure original array has not been changed
+  expect(array1).toStrictEqual(['a', 'b']);
+
+  const array2 = ['a'];
+  const item2 = randomiseArray(array2);
 
   expect(item2).toStrictEqual(['a']);
 

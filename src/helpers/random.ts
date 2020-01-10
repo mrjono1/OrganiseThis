@@ -125,3 +125,16 @@ export const randomItems = <T>(
 
   return randomItems;
 };
+
+export const randomiseArray = <T>(array: Array<T>): Array<T> => {
+  const result: Array<T> = [...array];
+
+  for (let index = array.length - 1; index > 0; index--) {
+    const randomIndex = Math.floor(Math.random() * index);
+    const temp = result[index];
+    result[index] = result[randomIndex];
+    result[randomIndex] = temp;
+  }
+
+  return result;
+};

@@ -1,10 +1,10 @@
 import OrganiseThis from '../lib/OrganiseThis';
 import { Settings, DaySetting, PersonSetting, SkillSetting } from '../settings';
-import { Weekday } from '../types';
+import { Weekday, SkillWeighting } from '../types';
 
 const skillSettings: SkillSetting[] = [
-  { id: 1, name: 'Open' },
-  { id: 2, name: 'Close' }
+  { id: 1, name: 'Open', weighting: SkillWeighting.Required },
+  { id: 2, name: 'Close', weighting: SkillWeighting.Required }
 ];
 
 const daySettings: DaySetting[] = [

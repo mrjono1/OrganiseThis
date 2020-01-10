@@ -1,4 +1,5 @@
-import { Settings } from '../settings';
+import { Settings, SkillSetting } from '../settings';
+import { SkillWeighting } from 'types';
 
 export const DefaultSettings: Settings = {
   oneSpanPerDay: true,
@@ -27,4 +28,10 @@ export const DefaultSettings: Settings = {
     enabled: false
   },
   idCounter: 1
+};
+
+export const DefaultSkillSetting: SkillSetting = {
+  id: 0,
+  name: 'Default',
+  weighting: SkillWeighting.Required
 };

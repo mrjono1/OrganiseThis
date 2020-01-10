@@ -14,8 +14,9 @@ export interface Settings {
   daySettings: DaySetting[];
   /**
    * If no skills are specified all other skill properties will be ignored
+   * Using Partial<SkillSetting> will default `weighting` if not already set
    */
-  skillSettings?: SkillSetting[];
+  skillSettings?: SkillSetting[] | Partial<SkillSetting>[];
   /**
    * This is enfoced during the auto generation of the Calendar
    */
@@ -42,7 +43,7 @@ export interface Settings {
 
   // I would perfer to use UUID but I want to ensure this project is as fast as possible so using integers
   /**
-   * Integer counter for ids
+   * Integer counter for ids, for internal use only
    */
   idCounter: number;
 }

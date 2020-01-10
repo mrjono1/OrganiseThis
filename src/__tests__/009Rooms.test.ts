@@ -4,7 +4,7 @@ import { Weekday } from '../types';
 
 const [SKILL_DINING_ROOM, SKILL_KITCHEN, SKILL_OPEN_KITCHEN, SKILL_CLOSE_KITCHEN] = [1, 2, 3, 4];
 
-const skillSettings: SkillSetting[] = [
+const skillSettings: Partial<SkillSetting>[] = [
   { id: SKILL_DINING_ROOM, name: 'Front of house', description: 'Can work out the front waiting on customers' },
   { id: SKILL_KITCHEN, name: 'Back of house', description: 'Can work in the kitchen' },
   { id: SKILL_OPEN_KITCHEN, name: 'Open Kitchen' },

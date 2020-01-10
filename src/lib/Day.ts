@@ -1,6 +1,7 @@
 ﻿import { Room } from 'lib';
 import { Settings, DaySetting } from 'settings';
 import { Weekday } from 'types';
+import { randomiseArray } from 'helpers';
 
 export class Day {
   public readonly id: number;
@@ -26,7 +27,7 @@ export class Day {
     }
 
     // Create the Rooms in the day
-    for (const dayRoomSetting of this.daySetting.dayRoomSettings) {
+    for (const dayRoomSetting of randomiseArray(this.daySetting.dayRoomSettings)) {
       const room = new Room(this.settings.idCounter++, this.settings, dayRoomSetting, personIndexesUsed);
       this.rooms.push(room);
     }

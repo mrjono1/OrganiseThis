@@ -1,6 +1,6 @@
 ﻿import { Settings, DayRoomSetting, PersonSetting, SpanSetting } from 'settings';
 import { Span } from 'lib';
-import { randomIndexAndItem } from 'helpers';
+import { randomIndexAndItem, randomiseArray } from 'helpers';
 
 export class Room {
   public readonly id: number;
@@ -20,7 +20,7 @@ export class Room {
 
   private newRoom(personIndexesUsed: number[]): void {
     // Create the Spans of the Room
-    for (const spanSetting of this.dayRoomSetting.spanSettings) {
+    for (const spanSetting of randomiseArray(this.dayRoomSetting.spanSettings)) {
       const { index, item } = this.getPerson(spanSetting, personIndexesUsed);
 
       const span = new Span(this.settings.idCounter++, this.settings, spanSetting, item);

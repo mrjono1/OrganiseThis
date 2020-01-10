@@ -4,7 +4,7 @@ import { DayRoomSetting } from './DayRoomSetting';
 
 export interface DaySetting {
   id: number;
-  weekday?: Weekday;
+  weekday: Weekday;
   /**
    * This is only used if there is one room otherwise use dayRoomSettings
    */

@@ -1,5 +1,6 @@
 ﻿import { Settings } from 'settings';
 import { Day } from 'lib';
+import { randomiseArray } from 'helpers';
 
 export class Calendar {
   public readonly id: number;
@@ -25,10 +26,16 @@ export class Calendar {
     if (this.days.length !== 0) {
       return;
     }
-    for (const daySetting of this.settings.daySettings) {
+
+    const unsortedDays: Day[] = [];
+    for (const daySetting of randomiseArray(this.settings.daySettings)) {
       const day = new Day(this.settings.idCounter++, this.settings, daySetting);
-      this.days.push(day);
+      unsortedDays.push(day);
     }
+
+    // Users will want the days in the correct order, and its easier to test
+    const sortedDays = unsortedDays.sort((day1, day2) => day1.daySetting.weekday - day2.daySetting.weekday);
+    sortedDays.forEach(day => this.days.push(day));
   }
 
   public evaluate(): void {

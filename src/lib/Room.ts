@@ -132,7 +132,7 @@ export class Room {
       toString.push(span.toString());
     }
 
-    return `Room Id: ${this.id}, Setting Id: ${this.dayRoomSetting.id}, ${name}
+    return `Room Id: ${this.id}, Setting Id: ${this.dayRoomSetting.id}
   Room Fitness: ${this._fitness}
   Spans:
 ${toString.join('\n')}`;
